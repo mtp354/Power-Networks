@@ -1,0 +1,6 @@
+pandas
+pyarrow
+pyyaml
+requests
+rapidfuzz
+networkx
