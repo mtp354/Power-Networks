@@ -8,6 +8,7 @@ from __future__ import annotations
 import re
 import unicodedata
 
+import pandas as pd
 from rapidfuzz import fuzz
 
 _SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
@@ -15,7 +16,7 @@ _SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 
 def normalize_name(name: str) -> str:
     """Lowercase, strip accents/punctuation/suffixes for comparison purposes only."""
-    if not name:
+    if pd.isna(name) or not name:
         return ""
     ascii_name = "".join(
         c for c in unicodedata.normalize("NFKD", name) if not unicodedata.combining(c)
@@ -33,3 +34,10 @@ def normalize_name(name: str) -> str:
 def name_similarity(name_a: str, name_b: str) -> float:
     """Return a 0-100 similarity score between two raw (un-normalized) names."""
     return fuzz.token_sort_ratio(normalize_name(name_a), normalize_name(name_b))
+
+
+def blocking_key(name: str) -> str:
+    """Last token of the normalized name, used to cheaply pre-filter fuzzy-match
+    candidates before running full comparisons on large datasets."""
+    tokens = normalize_name(name).split()
+    return tokens[-1] if tokens else ""
