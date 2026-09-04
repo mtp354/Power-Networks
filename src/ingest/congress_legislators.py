@@ -17,7 +17,7 @@ import pandas as pd
 import requests
 import yaml
 
-from src.schema import RAW_DIR, load_table, new_id, save_table
+from src.schema import RAW_DIR, load_table, new_id, purge_source, save_table
 
 RAW_BASE = "https://raw.githubusercontent.com/unitedstates/congress-legislators/main"
 SOURCE_NAME = "congress-legislators"
@@ -165,6 +165,7 @@ def ingest_committee_membership(edge_rows, bioguide_to_entity: dict, thomas_to_e
 
 def run() -> None:
     download_raw_files()
+    purge_source(SOURCE_NAME)  # full refresh: safe to re-run without duplicating rows
 
     entities_rows: list[dict] = []
     ext_id_rows: list[dict] = []

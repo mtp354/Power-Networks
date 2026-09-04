@@ -17,7 +17,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 
-from src.schema import RAW_DIR, load_table, new_id, save_table
+from src.schema import RAW_DIR, load_table, new_id, purge_source, save_table
 
 API_BASE = "https://data.europarl.europa.eu/api/v2"
 SOURCE_NAME = "europarl"
@@ -91,6 +91,7 @@ def fetch_org_label(org_id: str) -> str:
 
 def run() -> None:
     person_ids = fetch_current_term_person_ids()
+    purge_source(SOURCE_NAME)  # full refresh: safe to re-run without duplicating rows
 
     entities_rows: list[dict] = []
     ext_id_rows: list[dict] = []

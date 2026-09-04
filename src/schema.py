@@ -96,6 +96,31 @@ def init_tables() -> None:
             save_table(name, empty_table(name))
 
 
+def purge_source(source: str) -> None:
+    """Remove all entities/external_ids/edges attached to a given source so an
+    ingest script can be safely re-run (full refresh) without duplicating rows.
+
+    An entity is considered "owned" by `source` if its only external ids come
+    from that source. Entities also referenced by other sources are kept, but
+    the source-specific external id rows and edges are still removed.
+    """
+    entities = load_table("entities")
+    ext_ids = load_table("entity_external_ids")
+    edges = load_table("edges")
+
+    source_entity_ids = set(ext_ids.loc[ext_ids["source"] == source, "entity_id"])
+    other_source_entity_ids = set(ext_ids.loc[ext_ids["source"] != source, "entity_id"])
+    orphaned_entity_ids = source_entity_ids - other_source_entity_ids
+
+    entities = entities[~entities["entity_id"].isin(orphaned_entity_ids)]
+    ext_ids = ext_ids[ext_ids["source"] != source]
+    edges = edges[edges["source_dataset"] != source]
+
+    save_table("entities", entities)
+    save_table("entity_external_ids", ext_ids)
+    save_table("edges", edges)
+
+
 if __name__ == "__main__":
     init_tables()
     print(f"Initialized tables in {PROCESSED_DIR}")

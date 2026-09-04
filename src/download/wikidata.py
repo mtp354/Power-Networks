@@ -82,11 +82,19 @@ class WikidataDownloader(BaseDownloader):
         }}
         """
         session = self.get_session(custom_headers={"Accept": "application/sparql-results+json"})
-        response = session.get(
-            WIKIDATA_SPARQL_ENDPOINT,
-            params={"query": sparql_query, "format": "json"},
-            timeout=120,
-        )
+        for attempt in range(5):
+            response = session.get(
+                WIKIDATA_SPARQL_ENDPOINT,
+                params={"query": sparql_query, "format": "json"},
+                timeout=120,
+            )
+            if response.status_code in (429, 500, 502, 503, 504):
+                sleep_time = min(30, 5 * (attempt + 1))
+                logger.warning(f"[wikidata] Got {response.status_code}, retrying in {sleep_time}s...")
+                time.sleep(sleep_time)
+                continue
+            response.raise_for_status()
+            return response.json()
         response.raise_for_status()
         return response.json()
 
@@ -118,8 +126,8 @@ class WikidataDownloader(BaseDownloader):
                 downloaded.append(dest_path)
                 time.sleep(1.0)  # Courtesy sleep for Wikidata public SPARQL endpoint
             except Exception as exc:
-                logger.error(f"[wikidata] Failed SPARQL batch {idx}: {exc}")
-                raise
+                logger.error(f"[wikidata] Failed SPARQL batch {idx} after retries, skipping: {exc}")
+                continue
 
         return downloaded
 

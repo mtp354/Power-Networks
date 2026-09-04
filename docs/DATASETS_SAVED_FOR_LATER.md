@@ -4,11 +4,11 @@ This document tracks datasets and data sources identified from [`ReadMe.txt`](..
 
 ---
 
-## 1. ACLED (Armed Conflict Location & Event Data Project)
+## 1. ACLED (Armed Conflict Location & Event Data Project) — RESOLVED, manually downloaded
 - **Website**: [acleddata.com/conflict-data/download-data-files/aggregated-data](https://acleddata.com/conflict-data/download-data-files/aggregated-data)
 - **Description**: Weekly aggregated regional conflict, fatality, and civilian exposure events.
-- **Why it is saved for later**: All aggregated data downloads and API endpoints are behind authentication (`access_denied` / lock icon).
-- **How to activate**:
+- **Status update**: the automated downloader hit `access_denied` on this endpoint, but the aggregated regional/country-year files are in fact publicly downloadable through the browser without an account. These were manually downloaded and are now in `data/raw/ACLED/` (regional aggregates for Africa, Asia-Pacific, Europe-Central Asia, Latin America-Caribbean, Middle East, US-Canada, plus country-year summary files for fatalities, demonstrations, and political violence events). No ingest script exists yet — this maps to the paramilitary/conflict domain in the roadmap backlog.
+- **Original access notes (still relevant for the full event-level API/microdata)**:
   1. Register for a free academic/non-commercial account at `https://acleddata.com/user/register`.
   2. Verify email and log in to obtain an API key and user email token.
   3. Set environment variables:

@@ -14,40 +14,69 @@ Living roadmap for the elite power-network graph project. Update this file as ph
 | 0 | Repo scaffolding, entity-resolution schema (`entities`, `entity_external_ids`, `edges`, `match_candidates`) | Done |
 | 1a | US Congress + president/VP (unitedstates/congress-legislators) | Done |
 | 1b | EU MEPs, current term (European Parliament Open Data Portal) | Done |
-| 2a | US political donations (FEC bulk individual contributions) | Not started |
+| 2a | US political donations — candidate/committee/linkage graph (FEC bulk files) | Partial: committees, candidates, and linkage edges ingested; individual contributions file (donation edges) not yet downloaded/ingested (multi-GB, deferred) |
 | 2b | EU political party/foundation financing (APPF annual reports) | Not started |
-| 3 | Wikidata structured layer (positions, education, party, employer, spouse) for entities already discovered | Not started |
-| 4+ | Domain backlog (see below) | Not started |
+| 3 | Wikidata structured layer (positions, education, party, employer, spouse) | Done for US legislators (127/128 SPARQL batches; EU MEPs not yet linked to Wikidata QIDs) |
+| 4+ | Domain backlog (see below) | Raw data acquired for several backlog items (see below); no ingest scripts yet |
+
+## Raw data acquired, not yet ingested (backlog candidates)
+A separate `src/download/` layer (raw-fetch only, no entity-graph writes) now covers:
+- **IRS Tax-Exempt Organization Business Master File** (`data/raw/irs/`, ~340 MB) — non-profits/foundations/think tanks registry, maps to the "think tanks" backlog domain.
+- **SEC EDGAR company tickers/CIK directory** (`data/raw/sec_edgar/`) — maps to the "corporate interlocking directorates" backlog domain (CIK is the join key for later EDGAR filings work).
+- **ACLED aggregated conflict data** (`data/raw/ACLED/`, manually downloaded — the public aggregate/regional files turned out not to require an account, see `docs/DATASETS_SAVED_FOR_LATER.md`) — maps to the paramilitary/conflict domain from the original source list.
+- **CPDS** and **PolData** (`data/raw/cpds/`, `data/raw/poldata/`) — comparative political science reference datasets (government composition, cabinets); useful as contextual/validation data rather than a direct entity source.
+- **Open Data Inception catalog** (`data/raw/open_data_inception/`) — a meta-catalog of 2,600+ open data portals, useful for discovering further sources, not an entity source itself.
+
+None of these have ingest scripts yet; they are raw downloads only. Prioritize ingest scripts for IRS (think tanks/NGOs) and SEC EDGAR (interlocking directorates) next, as both directly extend existing domains.
 
 ## Domain backlog (future phases, roughly ordered by expected value/effort)
-1. Corporate interlocking directorates (shared board memberships)
+1. Corporate interlocking directorates (shared board memberships) — raw SEC EDGAR ticker/CIK directory already downloaded
 2. Offshore finance / shell companies (ICIJ Offshore Leaks, Panama/Pandora Papers)
 3. Lobbying registries (US Senate LDA, EU Transparency Register)
 4. Elite education & credentialing (Ivy-plus/Oxbridge alumni, secret societies)
-5. Think tanks & closed-door gatherings (CFR, Chatham House, Bilderberg, WEF)
+5. Think tanks & closed-door gatherings (CFR, Chatham House, Bilderberg, WEF) — raw IRS non-profit registry already downloaded
 6. Diplomatic corps (ambassadors/postings)
 7. Defense/arms industry (contractors, SIPRI arms-trade data)
-8. Energy sector elites, sports ownership & federations, central banking, sovereign wealth/family offices, religious institutions, private clubs — each evaluated individually once the above are integrated
+8. Paramilitary/conflict actors — raw ACLED aggregates already downloaded (manually)
+9. Energy sector elites, sports ownership & federations, central banking, sovereign wealth/family offices, religious institutions, private clubs — each evaluated individually once the above are integrated
 
 ## Near-term milestones
-1. **Phase 2a — FEC individual contributions**: bulk download, committee-entity creation, fuzzy-match contributors against existing officials only (no full deanonymization), unresolved rows to `match_candidates`.
-2. **Phase 2b — EU political financing**: parse APPF annual reports into party/foundation-level donation edges (coarser than FEC; no individual-donor matching available).
-3. **Phase 3 — Wikidata layer**: SPARQL pulls keyed off `wikidata_qid` external IDs already collected in Phase 1; add typed edges without duplicating existing entities.
-4. **Verification pass**: row-count sanity checks, referential-integrity check (anti-join), networkx load smoke test — repeat after every phase.
-5. Re-evaluate domain backlog priority once Phases 2–3 are integrated and the fusion approach (bipartite person↔org graph, projected to person-person) has been validated on two real domains.
+1. ~~**Phase 2a (part 1) — FEC committees/candidates/linkage**: committee and candidate entities, cross-referenced against existing officials via FEC id, linkage edges.~~ Done.
+2. ~~**Phase 3 — Wikidata layer**: SPARQL pulls keyed off `wikidata` external IDs collected in Phase 1a; typed edges (position held, educated at, employed by, party, spouse) without duplicating existing entities.~~ Done for US legislators.
+3. **Phase 2a (part 2) — FEC individual contributions**: download the multi-GB individual-contributions bulk file, fuzzy-match contributors against existing officials only (no full deanonymization), unresolved rows to `match_candidates`.
+4. **Phase 2b — EU political financing**: parse APPF annual reports into party/foundation-level donation edges (coarser than FEC; no individual-donor matching available).
+5. **Wikidata coverage for EU MEPs**: MEPs are not yet linked to Wikidata QIDs (unlike US legislators, whose `wikidata` field was added in Phase 1a) — add QID lookup/matching so Phase 3 can extend to MEPs.
+6. **IRS non-profit registry ingest**: parse the EO Business Master File into organization entities (think tanks/foundations/NGOs backlog domain) — raw data already downloaded (~325 MB).
+7. **SEC EDGAR ingest**: parse company tickers/CIK directory into organization entities as the seed for corporate interlocking directorates — raw data already downloaded.
+8. **Verification pass**: row-count sanity checks, referential-integrity check (anti-join), networkx load smoke test — repeat after every phase.
+9. Re-evaluate domain backlog priority once Phases 2–3 are integrated and the fusion approach (bipartite person↔org graph, projected to person-person) has been validated on two real domains.
 
 ## Estimated data storage requirements
 
-Baseline measured from the repo today (Phase 1a + 1b complete):
+Baseline measured from the repo today (Phase 1, 2a-partial, and 3 complete):
 
 | Location | Size | Notes |
 |---|---|---|
-| `data/processed/entities.parquet` | ~0.75 MB | 14,631 rows (13,526 people + 1,105 orgs: US legislators/committees + EU MEPs/political groups/committees) |
-| `data/processed/entity_external_ids.parquet` | ~1.3 MB | 73,254 rows |
-| `data/processed/edges.parquet` | ~0.6 MB | 13,073 rows (US committee memberships + EU political-group/committee memberships, full history per MEP) |
-| `data/raw/congress-legislators` | ~10 MB | Source YAML |
-| `data/raw/europarl` | ~16 MB | Per-MEP + per-org JSON cache (743 MEPs, 875 orgs) |
-| **Total (Phase 1 complete)** | **~29 MB** | |
+| `data/processed/entities.parquet` | ~2.6 MB | 49,279 rows (22,442 people + 26,837 orgs: US legislators/committees, EU MEPs/groups, FEC candidates/committees, Wikidata positions/schools/employers/parties) |
+| `data/processed/entity_external_ids.parquet` | ~2.8 MB | 121,525 rows |
+| `data/processed/edges.parquet` | ~4.3 MB | 78,972 rows (committee/political-group memberships, FEC candidate-committee linkages, Wikidata position/education/employer/party/spouse edges) |
+| `data/raw/` (all sources incl. IRS, ACLED, wikidata cache, etc.) | ~450 MB | See breakdown below |
+| **Total (current)** | **~460 MB** | |
+
+Raw data breakdown by source (`data/raw/`):
+
+| Source | Size | Ingested into graph? |
+|---|---|---|
+| `irs` | ~325 MB | Not yet (backlog: think tanks/NGOs) |
+| `ACLED` | ~43 MB | Not yet (backlog: paramilitary/conflict) |
+| `wikidata` | ~43 MB | Yes (Phase 3) |
+| `europarl` | ~16 MB | Yes (Phase 1b) |
+| `congress-legislators` | ~10 MB | Yes (Phase 1a) |
+| `cpds` | ~6.3 MB | Not yet (reference data) |
+| `open_data_inception` | ~2.5 MB | Not yet (source catalog, not an entity source) |
+| `sec_edgar` | ~2.5 MB | Not yet (backlog: interlocking directorates) |
+| `fec` | ~1.3 MB | Yes, partial (Phase 2a: committees/candidates/linkage; individual contributions not downloaded) |
+| `poldata` | ~0.4 MB | Not yet (reference data) |
 
 Projected growth by phase (order-of-magnitude; raw = downloaded source files, processed = parquet tables):
 
