@@ -15,3 +15,4 @@ https://en.wikipedia.org/wiki/Wikipedia:Database_download
 https://github.com/erikgahner/PolData
 https://cpds-data.org/
 https://ecpr.eu/group/political-networks
+https://www.irs.gov/charities-non-profits/tax-exempt-organization-search

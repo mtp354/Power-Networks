@@ -33,7 +33,7 @@ FILES = [
 
 # id fields in the legislator/executive YAML that we carry into entity_external_ids
 ID_FIELDS = ["bioguide", "thomas", "govtrack", "opensecrets", "votesmart", "cspan",
-             "wikipedia", "ballotpedia", "icpsr", "house_history", "lis", "fec"]
+             "wikipedia", "ballotpedia", "icpsr", "house_history", "lis", "fec", "wikidata"]
 
 
 def download_raw_files() -> None:
