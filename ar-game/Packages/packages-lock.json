@@ -11,13 +11,6 @@
       },
       "hash": "a1eaa4a011cffbe83fa479e3f8498f463e8515fb"
     },
-    "com.google.external-dependency-manager": {
-      "version": "1.2.190",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://package.openupm.com"
-    },
     "com.unity.burst": {
       "version": "1.8.31",
       "depth": 2,
