@@ -1,0 +1,13 @@
+{
+    "name": "FantasyEarth.App",
+    "rootNamespace": "FantasyEarth.App",
+    "references": [
+        "FantasyEarth.World", "FantasyEarth.Fantasy", "FantasyEarth.Positioning",
+        "FantasyEarth.Diagnostics", "FantasyEarth.Rendering", "Google.XR.ARCoreExtensions",
+        "Unity.XR.ARFoundation", "Unity.XR.ARSubsystems", "Unity.XR.CoreUtils", "Unity.InputSystem",
+        "Unity.RenderPipelines.Core.Runtime", "Unity.RenderPipelines.Universal.Runtime"
+    ],
+    "includePlatforms": [], "excludePlatforms": [], "allowUnsafeCode": false,
+    "overrideReferences": false, "precompiledReferences": [], "autoReferenced": true,
+    "defineConstraints": [], "versionDefines": [], "noEngineReferences": false
+}

@@ -80,4 +80,10 @@ Unity's local NUnit report is `/home/matt/.config/unity3d/mtp354/Fantasy Earth/T
 
 ## Completed through Task 8
 
-The 2026-10-25 Task 8 run contains **108 passed, 0 failed, 0 skipped** EditMode cases, including bundled-data, alignment-gate, and session-formatter checks. The live Console ground truth after this run reports 0 errors, 0 warnings, and no compilation failure. Pipeline retains historical missing-type errors from the intentional test-first compilation runs; these are recorded separately from the current Console state. The next implementation task is Task 9 (painted rendering).
+The 2026-10-25 Task 8 run contains **108 passed, 0 failed, 0 skipped** EditMode cases, including bundled-data, alignment-gate, and session-formatter checks. The live Console ground truth after this run reported 0 errors, 0 warnings, and no compilation failure. Pipeline retains historical missing-type errors from the intentional test-first compilation runs; these are recorded separately from the current Console state.
+
+## Tasks 9–10 device checkpoint
+
+Task 9's rendering assets passed 111 EditMode cases and four synthetic GPU previews. Task 10 adds the World scene, application wiring, permissions, private session logging and diagnostics. After the native startup fix, **115 EditMode cases pass**, with 0 compile errors. The final development build `build_e3218f132aec` succeeded with 0 errors and three vendor test-image warnings. The live Console after building likewise reports 0 errors and those three warnings.
+
+The APK is installed on the authorized Galaxy S25. The owner confirmed live camera video; logs establish both the denied-location fallback and `Earth: Enabled` after authorization. The updated APK also survives leaving the first-run camera permission prompt open. Outdoor lock measurements remain the final device acceptance check. See [device testing instructions](FANTASY_EARTH_DEVICE_TESTING.md) and the [Task 10 report](handoffs/reports/task-10-report.md) for current evidence and remaining acceptance.

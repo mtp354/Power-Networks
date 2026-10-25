@@ -3,3 +3,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Local Google Cloud credential downloads are not application assets.
+client_secret_*.json

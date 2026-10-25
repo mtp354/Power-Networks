@@ -404,14 +404,14 @@ Art direction (exact values are the implementer's call):
 - Temperate: warm golden. Desert: hot orange, light mist. Snowy: cool blue-white, heavier mist. Tropical: saturated green-teal, humid mist.
 - The bar is "a storybook world, not a phone filter".
 
-- [ ] **Step 1: Write the failing tests.**
+- [x] **Step 1: Write the failing tests.**
   - `LibraryHasLookForEveryBiome`: load `Assets/FantasyEarth/Rendering/BiomeLooks/BiomeLookLibrary.asset` with `AssetDatabase.LoadAssetAtPath`. For each `Biome` value, `TryGet` returns true, `Profile` isn't null, and `MistStrength` is in [0, 1].
   - `RendererHasPainterlyFeatureWithMaterial`: load the renderer data asset (write its exact path into the test). Assert it contains an active `PainterlyRendererFeature` whose material uses shader `FantasyEarth/Painterly`.
 
-- [ ] **Step 2: Run them.** Expected: fail.
-- [ ] **Step 3: Implement the shader, feature, and ScriptableObjects; create the assets; add the feature to the renderer.** Check the feature with the user-level skill `validate-urp-render-graph-renderer-feature`.
-- [ ] **Step 4: Run all EditMode tests and check the console.** Expected: all pass. `unity command console get --project-path "$PROJ"` shows no shader compile errors.
-- [ ] **Step 5: Commit** with message `Add painterly renderer feature and per-biome looks`.
+- [x] **Step 2: Run them.** Expected: fail.
+- [x] **Step 3: Implement the shader, feature, and ScriptableObjects; create the assets; add the feature to the renderer.** Check the feature with the user-level skill `validate-urp-render-graph-renderer-feature`.
+- [x] **Step 4: Run all EditMode tests and check the console.** Expected: all pass. `unity command console get --project-path "$PROJ"` shows no shader compile errors.
+- [x] **Step 5: Commit** with message `Add painterly renderer feature and per-biome looks`.
 
 ---
 
@@ -447,30 +447,30 @@ Scene contents:
 - An `App` GameObject holding the six components.
 - Post-processing enabled on the AR camera. No other UI.
 
-- [ ] **Step 1: Implement the six components and build the scene.** Remove the template scene from the build list and add `Assets/FantasyEarth/Scenes/World.unity`. Run all EditMode tests and `script recompile_status`. Expected: 0 failures and 0 compile errors.
+- [x] **Step 1: Implement the six components and build the scene.** Remove the template scene from the build list and add `Assets/FantasyEarth/Scenes/World.unity`. Run all EditMode tests and `script recompile_status`. Expected: 0 failures and 0 compile errors.
 
-- [ ] **Step 2: Owner sets up Google Cloud for keyless auth** (in the browser; the implementer gives these instructions and waits).
+- [x] **Step 2: Owner sets up Google Cloud for keyless auth** (in the browser; the implementer gives these instructions and waits).
   1. Create a Google Cloud project and enable the **ARCore API**.
   2. Configure the OAuth consent screen (External, testing mode, owner's account as a test user).
   3. Create an OAuth client ID of type **Android** with package `com.mtp354.fantasyearth` and the debug SHA-1 from:
      `~/Unity/Hub/Editor/6000.3.27f1/Editor/Data/PlaybackEngines/AndroidPlayer/OpenJDK/bin/keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android | grep SHA1`.
      If the keystore doesn't exist yet, run the Step 4 build first; Unity creates it.
 
-- [ ] **Step 3: Owner connects the S25** with Developer options and USB debugging on. Run `adb devices`. Expected: one device listed as `device`, not `unauthorized`.
+- [x] **Step 3: Owner connects the S25** with Developer options and USB debugging on. Run `adb devices`. Expected: one device listed as `device`, not `unauthorized`.
 
-- [ ] **Step 4: Build and install a development build**
+- [x] **Step 4: Build and install a development build**
 
-Run: `unity command build run --target Android --outputPath Builds/fantasy-earth-dev.apk --options Development --confirm --project-path "$PROJ"`, poll `build status` until it's completed and succeeded, then run `adb install -r "$PROJ/Builds/fantasy-earth-dev.apk"` and `adb shell monkey -p com.mtp354.fantasyearth -c android.intent.category.LAUNCHER 1`.
+Run: `unity command build run --target Android --outputPath Builds/fantasy-earth-dev.apk --options '["Development"]' --confirm --project-path "$PROJ"`, poll `build status` until it's completed and succeeded, then run `adb install -r "$PROJ/Builds/fantasy-earth-dev.apk"` and `adb shell monkey -p com.mtp354.fantasyearth -c android.intent.category.LAUNCHER 1`.
 Expected: the app opens straight into the camera with the painted look. After a three-finger tap, the overlay shows `earth: Enabled`.
 
 - [ ] **Step 5: Device checks (owner and implementer)**
   - Deny location permission on first launch: the app still shows the painted Temperate look, the overlay shows a non-Enabled earth state or no tracking, and it doesn't crash (`adb logcat -d | grep -c "FATAL EXCEPTION"` → 0).
   - Grant permission and go outdoors on a Street View-covered street for about 5 minutes, walking and panning: the overlay shows accuracies falling and `alignment: Locked` at least once, with no crash.
-  - Pull the logs: `adb pull /sdcard/Android/data/com.mtp354.fantasyearth/files/sessions "$PROJ/field-logs"`. If pull is denied, use `adb exec-out run-as com.mtp354.fantasyearth ls files/sessions` and `cat`.
-  - Expected: every line parses as JSON (`python3 -c "import json,sys;[json.loads(l) for l in open(sys.argv[1])]" <file>`), and the file contains at least one `"alignment":"Locked"` line.
+  - Pause the app with Home, wait for its writer to flush, then analyze with `python3 ar-game/Tools/diagnostics/summarize_session.py --serial DEVICE_SERIAL`. The tool removes coordinates on Android before reading the records; raw logs stay on the phone. See `docs/FANTASY_EARTH_DEVICE_TESTING.md`.
+  - Expected: every sanitized record parses as JSON, `lockedRecords` is at least 1, and the tool reports locked accuracy medians and time to first lock.
   - Record in the commit message the median `hAcc` and `yawAcc` once locked, and the time to the first lock. Plan 2 tunes the thresholds from these.
 
-- [ ] **Step 6: Commit** with message `Add World scene: painted camera view, Geospatial sampling, diagnostics`. Don't commit `Builds/` or `field-logs/`: they contain precise location and are gitignored.
+- [x] **Step 6: Commit** with message `Add World scene: painted camera view, Geospatial sampling, diagnostics`. Don't commit `Builds/` or `field-logs/`: they contain precise location and are gitignored.
 
 ---
 
