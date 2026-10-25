@@ -16,6 +16,27 @@ Thin MonoBehaviours in `App` read ARCore and drive rendering. A URP Render Graph
 
 **Spec:** `docs/superpowers/specs/2026-10-24-ar-fantasy-world-v1-design.md`
 
+## Execution status — 2026-10-25
+
+Tasks **1–8 are implemented**. Tasks 9–10 remain outside this completed checkpoint.
+
+| Task | Status | Implementation commit / evidence |
+|---|---|---|
+| 1: repo restructure | Complete | `7c49f6f` |
+| 2: Unity LTS project | Complete | `7b5ad7d` |
+| 3: ARCore and Android | Complete | `558a549`, follow-up resolver fixes; existing smoke APK |
+| 4: World primitives | Complete | `64f4b34`; original 14 cases remain passing |
+| 5: biome mapping | Complete | `a566ec9`; 33 cases validated during takeover |
+| 6: climate dataset/model | Complete | `e7fb32b`, cache-verification follow-up `a17bf03`; generated 6,480,000-byte LFS asset, attribution, Python and real-location tests |
+| 7: alignment gate | Complete | `da14188`; 36 additional EditMode cases |
+| 8: session formatter | Complete | `649bea8`; 17 additional EditMode cases |
+| 9: painted rendering | Not started | Next implementation task |
+| 10: World scene/device run | Not started | After Task 9 |
+
+The latest suite contains **108 passing EditMode cases**, with zero failures/skips. See `docs/handoffs/reports/` for completion reports and `docs/UNITY_WORKFLOW.md` for the working Editor connection. Older Tasks 1–5 checkboxes below are the original historical checklist; the status table and reports establish their current state. Tasks 6–8 checkboxes were updated during this execution.
+
+Accepted setup adjustments supersede the original instructions below: Android minimum API **25**; use the **EDM4U bundled with ARCore Extensions**, with no duplicate OpenUPM package; retain installed iOS Build Support for Extensions' editor code. Session JSON additionally writes null for null EarthState or non-finite blend values to preserve JSON validity. No Task 9 rendering, Task 10 scene, cloud, or device work is claimed here.
+
 ## Global Constraints
 
 - Repo root: `/home/matt/Projects/Power Networks/Power-Networks`. The path contains a space, so always quote it. Below, `$REPO` means this path and `$PROJ` means `"$REPO/ar-game"`.
@@ -249,24 +270,24 @@ Expected: `status: completed` with result `Succeeded`, and `Builds/smoke.apk` ex
 
 Source data: Beck et al. (2023), "High-resolution (1 km) Köppen-Geiger maps for 1901–2099 based on constrained CMIP6 projections", figshare article 21789074, licence CC BY 4.0. Download `koppen_geiger_tif.zip` from `https://ndownloader.figshare.com/files/61012822` (about 130 MB) and use the `1991_2020/koppen_geiger_0p1.tif` member.
 
-- [ ] **Step 1: Write the failing pytest tests**
+- [x] **Step 1: Write the failing pytest tests**
   - `test_to_grid_bytes_row_major`: a 2×3 uint8 array gives the row-major bytes.
   - `test_rejects_wrong_shape`: shape (1800, 3601) with `expected_shape=(1800, 3600)` raises `ValueError`.
   - `test_rejects_values_above_30`
 
-- [ ] **Step 2: Run them.** `cd "$PROJ/Tools/climate" && python3 -m venv .cache/venv && .cache/venv/bin/pip install -q -r requirements.txt && .cache/venv/bin/pytest -q`. Expected: fail, because the functions don't exist yet.
+- [x] **Step 2: Run them.** `cd "$PROJ/Tools/climate" && python3 -m venv .cache/venv && .cache/venv/bin/pip install -q -r requirements.txt && .cache/venv/bin/pytest -q`. Expected: fail, because the functions don't exist yet.
 
-- [ ] **Step 3: Implement the script.**
+- [x] **Step 3: Implement the script.**
   - `main` downloads the zip into `cache_dir` if it's missing and reads the member with `tifffile`.
   - Assert shape `(1800, 3600)`, dtype `uint8`, max ≤ 30, and that the GeoTIFF tie point is (-180, 90) with pixel scale 0.1. If the raster is stored south-up, flip it.
   - Write the `to_grid_bytes` output to `out_path`.
   - Defaults: `out_path` is `../../Assets/FantasyEarth/Data/koppen_1991_2020_0p1.bytes` and `cache_dir` is `.cache/`, both relative to the script.
 
-- [ ] **Step 4: Run pytest, then generate the asset.** Expected: pytest passes. `.cache/venv/bin/python build_koppen_bytes.py` writes a file of exactly `6480000` bytes.
+- [x] **Step 4: Run pytest, then generate the asset.** Expected: pytest passes. `.cache/venv/bin/python build_koppen_bytes.py` writes a file of exactly `6480000` bytes.
 
-- [ ] **Step 5: Write `ATTRIBUTION.md`.** It gives the dataset citation and the CC BY 4.0 link, and notes that the in-app credits screen comes in Plan 3.
+- [x] **Step 5: Write `ATTRIBUTION.md`.** It gives the dataset citation and the CC BY 4.0 link, and notes that the in-app credits screen comes in Plan 3.
 
-- [ ] **Step 6: Write the failing C# tests.**
+- [x] **Step 6: Write the failing C# tests.**
   - `ClimateModelTests` (using a synthetic grid):
     - `ClimateAt_ReportsProvenance`: source, timestamp, and confidence 1.0.
     - `ClimateAt_OceanIsNoneWithZeroConfidence`
@@ -277,9 +298,9 @@ Source data: Beck et al. (2023), "High-resolution (1 km) Köppen-Geiger maps for
     - Utqiaġvik (71.29, -156.79) → Snowy
     - Mid-Atlantic (30.0, -40.0) → Köppen `None`, biome Temperate
 
-- [ ] **Step 7: Implement `ClimateModel`, then run all EditMode tests.** Expected: all pass.
+- [x] **Step 7: Implement `ClimateModel`, then run all EditMode tests.** Expected: all pass.
 
-- [ ] **Step 8: Commit.** Check `git lfs ls-files | grep -c koppen` returns `1`, then commit with message `Add bundled Köppen-Geiger climate grid and ClimateModel`.
+- [x] **Step 8: Commit.** Check `git lfs ls-files | grep -c koppen` returns `1`, then commit with message `Add bundled Köppen-Geiger climate grid and ClimateModel`.
 
 ---
 
@@ -305,7 +326,7 @@ Rules, applied in this order within each `Update`:
 5. **Locked → Unlocked** once bad samples have accumulated `≥ ExitDwellS - 1e-4` seconds continuously. Any non-bad sample resets the timer. **Losing tracking unlocks immediately.**
 6. After the state update, `RebuiltBlend` moves by `deltaTimeS / BlendDurationS`: toward 1 when Locked, toward 0 when Unlocked, clamped to [0, 1].
 
-- [ ] **Step 1: Write the failing tests** (`AlignmentThresholds.Default`; each step is 0.1 s; "good" means `(true, 1.0, 1.0)`):
+- [x] **Step 1: Write the failing tests** (`AlignmentThresholds.Default`; each step is 0.1 s; "good" means `(true, 1.0, 1.0)`):
   - `StartsUnlockedWithZeroBlend`
   - `LocksOnlyAfterFullEnterDwell`: 9 good steps leave it Unlocked; the 10th locks it.
   - `NonGoodSampleResetsEnterDwell`: 5 good, 1 sample at `(true, 2.0, 1.0)`, then 9 good leave it Unlocked; 1 more locks it.
@@ -322,10 +343,10 @@ Rules, applied in this order within each `Update`:
   - `NegativeDeltaTimeIsIgnored`: 20 good samples with `deltaTimeS = -1` leave it Unlocked with blend 0.
   - `FromEarth_RequiresEnabledAndTracking`: all four combinations.
 
-- [ ] **Step 2: Run them.** Expected: compile failure.
-- [ ] **Step 3: Implement the three files.**
-- [ ] **Step 4: Run them.** Expected: all pass.
-- [ ] **Step 5: Commit** with message `Add alignment gate with hysteresis and blend`.
+- [x] **Step 2: Run them.** Expected: compile failure.
+- [x] **Step 3: Implement the three files.**
+- [x] **Step 4: Run them.** Expected: all pass.
+- [x] **Step 5: Commit** with message `Add alignment gate with hysteresis and blend`.
 
 ---
 
@@ -342,17 +363,17 @@ Rules, applied in this order within each `Update`:
   - `public readonly struct SessionLogEntry { public SessionLogEntry(long unixTimeMs, GeoPoint? position, double horizontalAccuracyM, double yawAccuracyDeg, string earthState, bool isTracking, AlignmentState alignment, float rebuiltBlend, KoppenClass koppen, Biome biome); }`, with a get-only property for each parameter: `UnixTimeMs`, `Position`, `HorizontalAccuracyM`, `YawAccuracyDeg`, `EarthState`, `IsTracking`, `Alignment`, `RebuiltBlend`, `Koppen`, `Biome`.
   - `public static class SessionLogFormatter { public static string ToJsonLine(SessionLogEntry e); }`. One JSON object, with no trailing newline. Keys appear in this exact order: `t, lat, lon, hAcc, yawAcc, earth, tracking, alignment, blend, koppen, biome`. Latitude and longitude use `F7`; accuracies and blend use `F2`; all formatting is invariant culture. A null position gives `"lat":null,"lon":null`. Non-finite accuracies give `null`. `earth` is a JSON-escaped string, with quotes and backslashes escaped.
 
-- [ ] **Step 1: Write the failing tests.**
+- [x] **Step 1: Write the failing tests.**
   - `FormatsExactLine`: the entry `(1792890000000, new GeoPoint(51.5000001, -0.1234567), 1.234, 0.5, "Enabled", true, AlignmentState.Locked, 0.5f, KoppenClass.Cfb, Biome.Temperate)` gives exactly `{"t":1792890000000,"lat":51.5000001,"lon":-0.1234567,"hAcc":1.23,"yawAcc":0.50,"earth":"Enabled","tracking":true,"alignment":"Locked","blend":0.50,"koppen":"Cfb","biome":"Temperate"}`.
   - `NullPositionWritesNulls`
   - `NonFiniteAccuracyWritesNull`
   - `EscapesEarthState`: the input `a"b\c` produces `"earth":"a\"b\\c"`.
   - `UsesDotDecimalsUnderGermanCulture`: set `CultureInfo.CurrentCulture = new CultureInfo("de-DE")` inside a try/finally that restores it, then assert the same exact line as `FormatsExactLine`.
 
-- [ ] **Step 2: Run them.** Expected: compile failure.
-- [ ] **Step 3: Implement the two files** with a `StringBuilder` and no JSON library.
-- [ ] **Step 4: Run them.** Expected: all pass.
-- [ ] **Step 5: Commit** with message `Add session log JSON line formatter`.
+- [x] **Step 2: Run them.** Expected: compile failure.
+- [x] **Step 3: Implement the two files** with a `StringBuilder` and no JSON library.
+- [x] **Step 4: Run them.** Expected: all pass.
+- [x] **Step 5: Commit** with message `Add session log JSON line formatter`.
 
 ---
 

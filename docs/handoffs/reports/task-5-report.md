@@ -1,5 +1,7 @@
 # Task 5 Report: Köppen class to fantasy biome
 
+> Historical worker report. The implementation was subsequently committed in `a566ec9` and validated in Unity: 47 cases passed, 0 failed. See the [follow-up review](task-5-review.md) for the current result; the pending/uncommitted details below describe the original worker's session.
+
 **Status:** `implemented, Unity validation pending`
 
 ---

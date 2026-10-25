@@ -2,7 +2,9 @@
 
 Prepared 2026-10-25 from commit `d1fec0c`. These briefs are implementation instructions; none of the tasks below has been implemented by preparing them. Recheck the actual files before starting, because another worker may have completed a task since this snapshot.
 
-## Choose a task
+**Completion update, 2026-10-25:** All four briefs below are complete. Task 5 is in `a566ec9`; full Task 6 (including 6a) is in `e7fb32b`; Task 7 is in `da14188`; Task 8 is in `649bea8`. The complete suite has **108 passing Unity EditMode cases**. See the [completion report](reports/completion-through-task-8.md), [Task 5 review](reports/task-5-review.md), and [verified Unity workflow](../UNITY_WORKFLOW.md). The next work is original Plan 1 Task 9, followed by Task 10; do not redispatch these completed briefs.
+
+## Completed task briefs
 
 | Brief | Difficulty | Prerequisites | Scope |
 |---|---|---|---|
@@ -11,13 +13,13 @@ Prepared 2026-10-25 from commit `d1fec0c`. These briefs are implementation instr
 | [Task 7: alignment gate](task-7-alignment-gate.md) | Moderate; review carefully | None of Tasks 5–6 | A small state machine with timing, hysteresis, and invalid-input tests |
 | [Task 8: log formatting](task-8-session-log-format.md) | Easy once dependencies exist | Tasks 5 and 7 | A value type, deterministic JSON formatting, and locale/escaping tests |
 
-Suggested order with one worker: **5 → 6a → 7 → 8**. Task 7 does not depend on the climate dataset, so original Task 6 can remain partially unfinished while Tasks 7–8 proceed. Task 6a does not need Task 5 either.
+The completed implementation order was **6 → 7 → 8**, following the inherited Task 5. Task 7 does not depend on the climate dataset, so original Task 6 can remain partially unfinished while Tasks 7–8 proceed. Task 6a does not need Task 5 either.
 
-Use a cheaper coding model for Tasks 5 and 6a first. Task 7 has the most consequential edge cases and deserves an independent review before device integration. Reserve climate acquisition/GeoTIFF processing, rendering (Task 9), scene composition, cloud authentication, and device testing (Task 10) for a separate session.
+Tasks 5 and 6a were the simplest bounded assignments. Task 7 has the most consequential edge cases and was included in final review before device integration. Reserve climate acquisition/GeoTIFF processing, rendering (Task 9), scene composition, cloud authentication, and device testing (Task 10) for a separate session.
 
 ## Prompts to give the worker
 
-Start the worker in this repository with file-editing and shell access. Give it one prompt at a time:
+These prompts are preserved as historical examples of the completed handoffs. Do not dispatch them for new implementation; the corresponding types and tests already exist:
 
 ```text
 Read docs/handoffs/README.md and docs/handoffs/task-5-biome-rules.md.
@@ -49,7 +51,7 @@ Use one worker and report using the shared format.
 - Unity project: `ar-game/`; Editor `6000.3.27f1` (Unity 6.3 LTS).
 - Existing production code: `ar-game/Assets/FantasyEarth/World/`.
 - Existing tests: `ar-game/Assets/FantasyEarth/Tests/EditMode/World/`.
-- Baseline: 14 World EditMode cases passed on 2026-10-25. This is historical evidence, not a test result for your changes. Task 4's previous independent review was interrupted by Copilot quota; these briefs do not close that review.
+- Baseline: 14 World EditMode cases passed on 2026-10-25. This is historical evidence, not a test result for your changes. Task 4's previous independent review was interrupted by Copilot quota; its 14 cases are included in the latest 108-case passing suite.
 - Original task contracts: `docs/superpowers/plans/2026-10-24-fantasy-earth-plan-1-foundation.md`. The selected brief repeats the relevant contract. Read only its corresponding original task if more context is needed; do not start executing the whole plan.
 - Use one worker for these bounded assignments. Do not launch nested agents or add tooling. Follow any higher-priority instructions in the worker's own environment.
 - Use existing C# formatting and NUnit conventions. Production World, Fantasy, Positioning, and Diagnostics assemblies must have `noEngineReferences: true` and use no UnityEngine/UnityEditor APIs.
@@ -68,7 +70,7 @@ The implementation requires file editing, Git, and Unity EditMode testing. A dir
 
 At preparation time, this Codex session had shell/file editing, web research, GitHub connector tools, and REA MCP tools exposed. `unity` CLI `1.0.0-beta.8`, `git`, `git-lfs`, and `adb` were found on PATH. `com.unity.pipeline` `0.9.1-exp.1` is installed in the project. GitHub and REA backends were not exercised during preparation. No direct Unity MCP or Desktop Commander tools were exposed. A different worker must check its own available tools.
 
-The latest `unity status` probe returned `STATUS_NO_INSTANCES`. A worker must establish its own connection before claiming live validation. Do not install another bridge or reinstall Pipeline to address that result. MCP tools depend on the client's configured servers; see the [official OpenAI MCP documentation](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
+The preparation-time `unity status` probe returned `STATUS_NO_INSTANCES`. During takeover, opening the Editor and using approved host access established the existing Pipeline connection and enabled the passing takeover and subsequent 108-case runs. Sandboxed discovery alone can still return no instances. See [the verified workflow](../UNITY_WORKFLOW.md); do not install another bridge or reinstall Pipeline to address this discovery issue. MCP tools depend on the client's configured servers; see the [official OpenAI MCP documentation](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
 
 1. Inspect `git status --short`, the selected files, and the existing test asmdef. Preserve any pre-existing changes.
 2. Write the brief's meaningful behavior tests before implementation. If Unity is available, observe the expected initial failure, then implement and test. A missing-type compile failure is valid initial evidence; zero discovered tests is never a passing result.
@@ -80,7 +82,7 @@ The latest `unity status` probe returned `STATUS_NO_INSTANCES`. A worker must es
    ```
 
    If unavailable, report that explicitly. If the session permits opening this project, `unity open "$PROJ"` can start it; otherwise finish the source work and report that Unity validation is pending. Do not borrow an Editor attached to another checkout. If the owner confirms an Editor is open but discovery fails, report a possible sandbox/connection limitation instead of asserting that it is closed.
-4. Ensure the Editor keeps ticking while unfocused. Discover the installed command with `unity command --query autotick --project-path "$PROJ" --format json` and enable its autotick option. Do not enter Play Mode for these tests.
+4. Ensure the Editor keeps ticking while unfocused. The verified command is `unity command editor set_auto_tick --enable true --interval_ms 16 --project-path "$PROJ" --format json`; discover it with `unity command --query tick` if needed. Searching for `autotick` does not match this version's command name. Do not enter Play Mode for these tests.
 5. Recompile and poll the status command until the recompile finishes; a successful trigger response alone is insufficient:
 
    ```bash
