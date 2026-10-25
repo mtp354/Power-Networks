@@ -15,3 +15,8 @@
 .superpowers/
 Tools/**/.cache/
 field-logs/
+
+# Regenerated on every Android build (Unity native build temp, ARCore Extensions / EDM4U outputs)
+/.utmp/
+/Assets/Plugins/Android/proguard-user.txt*
+/ProjectSettings/AndroidResolverDependencies.xml
