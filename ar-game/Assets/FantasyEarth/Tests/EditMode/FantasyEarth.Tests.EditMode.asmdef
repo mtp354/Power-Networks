@@ -4,7 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "FantasyEarth.World"
+        "FantasyEarth.World",
+        "FantasyEarth.Fantasy"
     ],
     "includePlatforms": [
         "Editor"

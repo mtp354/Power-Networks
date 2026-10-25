@@ -1,0 +1,17 @@
+{
+    "name": "FantasyEarth.Fantasy",
+    "rootNamespace": "FantasyEarth.Fantasy",
+    "references": [
+        "FantasyEarth.World"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
+
