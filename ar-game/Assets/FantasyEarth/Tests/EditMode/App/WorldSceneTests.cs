@@ -50,7 +50,7 @@ namespace FantasyEarth.Tests.App
                 Assert.AreSame(cameraManager, extension.CameraManager);
                 Assert.IsNotNull(extension.ARCoreExtensionsConfig);
                 Assert.AreEqual(GeospatialMode.Enabled, extension.ARCoreExtensionsConfig.GeospatialMode);
-                Assert.AreEqual(StreetscapeGeometryMode.Disabled, extension.ARCoreExtensionsConfig.StreetscapeGeometryMode);
+                Assert.AreEqual(StreetscapeGeometryMode.Enabled, extension.ARCoreExtensionsConfig.StreetscapeGeometryMode);
                 var volume = Find<Volume>(scene);
                 Assert.IsTrue(volume.isGlobal);
                 Assert.IsNotNull(volume.sharedProfile);
@@ -63,7 +63,10 @@ namespace FantasyEarth.Tests.App
                 References(Find<GeospatialSampler>(scene), "earthManager", "extensions");
                 References(Find<ClimateService>(scene), "koppenGrid");
                 References(Find<PaintedLookController>(scene), "library", "volume", "motes");
-                References(Find<DiagnosticsOverlay>(scene), "presenter");
+                References(Find<DiagnosticsOverlay>(scene), "presenter", "buildings");
+                References(Find<LiveBuildingController>(scene), "sampler", "presenter", "origin", "layer", "buildingMaterial");
+                Assert.IsNotNull(Find<ObservedBuildingLayer>(scene));
+                Assert.IsNull(FindOptional<ARStreetscapeGeometryManager>(scene), "SDK manager must be created only after native tracking is ready.");
                 References(Find<WorldPresenter>(scene), "sampler", "climate", "look", "logger");
                 Assert.IsNotNull(Find<SessionLogger>(scene));
             }
@@ -86,6 +89,22 @@ namespace FantasyEarth.Tests.App
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(sampler, null));
                 Assert.IsFalse(sampler.Current.IsTracking);
                 Assert.IsNull(sampler.Position);
+            }
+            finally { UnityEngine.Object.DestroyImmediate(go); }
+        }
+
+        [Test]
+        public void LiveBuildingsWithoutSessionDoNotCreateAnUnsafeNativeManager()
+        {
+            var go=new GameObject("Unready live buildings test");
+            try
+            {
+                var controller=go.AddComponent<LiveBuildingController>();
+                Assert.DoesNotThrow(() => typeof(LiveBuildingController).GetMethod("Update",
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).Invoke(controller,null));
+                Assert.AreEqual("WaitingForSession",controller.Status);
+                Assert.AreEqual(0,controller.ObservedCount);
+                Assert.IsNull(go.GetComponentInChildren<ARStreetscapeGeometryManager>());
             }
             finally { UnityEngine.Object.DestroyImmediate(go); }
         }
@@ -122,12 +141,19 @@ namespace FantasyEarth.Tests.App
 
         private static T Find<T>(Scene scene) where T : Component
         {
+            T found=FindOptional<T>(scene);
+            if (found!=null) return found;
+            Assert.Fail("Missing " + typeof(T).Name);
+            return null;
+        }
+
+        private static T FindOptional<T>(Scene scene) where T : Component
+        {
             foreach (var root in scene.GetRootGameObjects())
             {
                 T result = root.GetComponentInChildren<T>(true);
                 if (result != null) return result;
             }
-            Assert.Fail("Missing " + typeof(T).Name);
             return null;
         }
 

@@ -9,6 +9,7 @@ namespace FantasyEarth.App
     public sealed class DiagnosticsOverlay : MonoBehaviour
     {
         [SerializeField] private WorldPresenter presenter;
+        [SerializeField] private LiveBuildingController buildings;
         private bool _visible;
         private bool _gestureHeld;
         private bool _touchEnabled;
@@ -46,6 +47,9 @@ namespace FantasyEarth.App
                 "\nYaw: " + Accuracy(entry.YawAccuracyDeg) + "°\nAlignment: " + entry.Alignment +
                 "\nBlend: " + entry.RebuiltBlend.ToString("F2", CultureInfo.InvariantCulture) +
                 "\nKöppen: " + entry.Koppen + "\nBiome: " + entry.Biome;
+            if (buildings!=null)
+                _text+="\nBuildings: "+buildings.Status+"\nObserved / prepared / drawn: "+buildings.ObservedCount+" / "+buildings.PreparedCount+" / "+buildings.RenderedCount+
+                    "\nVertices: "+buildings.OwnedVertexCount+"\nSkipped attempts: "+buildings.SkippedAttempts;
         }
 
         private static string Accuracy(double value) => double.IsNaN(value) || double.IsInfinity(value)
@@ -56,7 +60,7 @@ namespace FantasyEarth.App
             if (!Debug.isDebugBuild || !_visible) return;
             if (_style == null) _style = new GUIStyle(GUI.skin.label) { fontSize = Mathf.Clamp(Screen.width / 30, 18, 36) };
             float width = Mathf.Min(Screen.width - 32, 760);
-            GUILayout.BeginArea(new Rect(16, 32, width, _style.fontSize * 13), GUI.skin.box);
+            GUILayout.BeginArea(new Rect(16, 32, width, Mathf.Min(Screen.height-64,_style.fontSize * 19)), GUI.skin.box);
             GUILayout.Label(_text, _style);
             GUILayout.EndArea();
         }

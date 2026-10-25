@@ -119,3 +119,16 @@ gap. The installed APK hash still matches repaired calibrated build
 `build_99fecdc2f11b`; the building-data APK remains uninstalled. Task 10 Step 5 and
 calibration acceptance are complete. See the
 [measured aggregate](handoffs/reports/alignment-lock-field-summary.json).
+
+## First live Streetscape placement
+
+The owner approved temporary session identities for initial live placement.
+World now has a guarded Streetscape controller and an owned observed-building
+render layer; source geometry is preserved and fantasy facade styling fades with
+alignment blend. **159/159 EditMode cases pass**, and three synthetic GPU renders
+were inspected. Build `build_b11d1aab1679` succeeded with zero errors and two vendor
+test-image warnings; the dependency verifier passed. The APK is installed on the
+S25, preserving consent/data and the camera-confirmed APK for rollback. Initial
+startup has no current-process Unity/crash errors; live geometry/physical placement
+still requires outdoor validation. See the
+[live-placement report](handoffs/reports/live-building-placement.md).

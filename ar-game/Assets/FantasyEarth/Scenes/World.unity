@@ -436,7 +436,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 100
+  far clip plane: 250
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -579,6 +579,8 @@ GameObject:
   - component: {fileID: 1038501702}
   - component: {fileID: 1038501701}
   - component: {fileID: 1038501700}
+  - component: {fileID: 1038501708}
+  - component: {fileID: 1038501707}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -615,6 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.DiagnosticsOverlay
   presenter: {fileID: 1038501700}
+  buildings: {fileID: 1038501707}
 --- !u!114 &1038501702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +687,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1038501707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038501699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f590a14cf3ced411ea9eaf89125fcea8, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.LiveBuildingController
+  sampler: {fileID: 1038501705}
+  presenter: {fileID: 1038501700}
+  origin: {fileID: 1491631404}
+  layer: {fileID: 1038501708}
+  buildingMaterial: {fileID: 2100000, guid: ec5833ab16710d2258f439e775a1c0f9, type: 2}
+--- !u!114 &1038501708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038501699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b79174dc9e56a74a46f726251b3aae, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: FantasyEarth.Rendering::FantasyEarth.Rendering.ObservedBuildingLayer
 --- !u!1 &1491631402
 GameObject:
   m_ObjectHideFlags: 0

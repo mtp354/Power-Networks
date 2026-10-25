@@ -65,6 +65,26 @@ medians 0.88 m / 1.36°. See the [aggregate evidence](handoffs/reports/alignment
 No repeat walk is needed to close Plan 1. Later anchored-building acceptance will
 need its own device validation.
 
+## First live-building build
+
+The current live-placement prototype enables Streetscape only through the guarded
+consent/permission/tracking path. It preserves and styles ARCore's observed
+surfaces, using temporary session identities approved for this first test. World
+remains the sole build scene. The installed APK is
+`Builds/fantasy-earth-live-buildings.apk`; its build/hash/rollback information is in
+the [live-placement report](handoffs/reports/live-building-placement.md).
+
+The three-finger panel now shows Buildings status plus observed/prepared/drawn
+counts. Prepared copies can exist before lock; drawn is zero at zero blend.
+After lock, look for `LiveBuildings` and a positive drawn count. Pan across real
+building corners/roofs and walk a few metres to check placement and stability.
+Then test Home/reopen and recovery after lock. If nothing appears, report status
+and the three counts: zero observations and rejected render candidates mean
+different things. No coordinates or private screenshots are needed.
+
+This device check remains distinct from Plan 1's completed lock test. Stable map
+IDs, canonical rebuilt architecture, props and map view are later integration.
+
 `ErrorNotAuthorized` requires checking ARCore API enablement and the Android OAuth package/certificate pair. `Enabled` with no lock can reflect positioning quality or VPS coverage; record the real measurements before tuning thresholds.
 
 ## Inspect measurements without exporting coordinates

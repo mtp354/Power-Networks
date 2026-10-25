@@ -10,7 +10,7 @@ namespace FantasyEarth.Rendering
     /// <summary>One owned, vertex-colored mesh per building; no per-window GameObjects or materials.</summary>
     public static class BuildingMeshBuilder
     {
-        private readonly struct Palette
+        internal readonly struct Palette
         {
             public readonly Color Wall, Roof, Trim, Window, Banner;
             public Palette(Color wall, Color roof, Color trim, Color banner)

@@ -118,3 +118,8 @@ Streetscape Geometry in the app or place these meshes over the camera.
    building-placement acceptance remains separate.
 5. Add deterministic ground props, the map/avatar view and the view-switch
    gesture. Dense neighborhood generation and device rendering remain unprofiled.
+
+Subsequent progress: the owner approved a first live-placement build using
+temporary session identities. The guarded Streetscape lifecycle and observed-mesh
+styling layer are implemented and installed; canonical map placement/matching
+remains separate. See [the live-placement report](live-building-placement.md).

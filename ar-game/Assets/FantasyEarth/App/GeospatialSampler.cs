@@ -26,6 +26,8 @@ namespace FantasyEarth.App
         public PositioningSample Current { get; private set; }
         public GeoPoint? Position { get; private set; }
         public string EarthStateName { get; private set; } = "SessionNotReady";
+        public bool StreetscapeReady => Current.IsTracking && extensions!=null && extensions.isActiveAndEnabled &&
+            _runtimeConfig!=null && _runtimeConfig.StreetscapeGeometryMode==StreetscapeGeometryMode.Enabled;
 
         private void Awake()
         {
@@ -41,6 +43,7 @@ namespace FantasyEarth.App
                 _originalConfig = extensions.ARCoreExtensionsConfig;
                 _runtimeConfig = Instantiate(_originalConfig);
                 _runtimeConfig.GeospatialMode = GeospatialMode.Disabled;
+                _runtimeConfig.StreetscapeGeometryMode = StreetscapeGeometryMode.Disabled;
                 extensions.ARCoreExtensionsConfig = _runtimeConfig;
             }
 #endif
@@ -63,7 +66,11 @@ namespace FantasyEarth.App
 #if UNITY_ANDROID
             if (!_consented || !Permission.HasUserAuthorizedPermission(Permission.FineLocation))
             {
-                if (_runtimeConfig != null) _runtimeConfig.GeospatialMode = GeospatialMode.Disabled;
+                if (_runtimeConfig != null)
+                {
+                    _runtimeConfig.GeospatialMode = GeospatialMode.Disabled;
+                    _runtimeConfig.StreetscapeGeometryMode = StreetscapeGeometryMode.Disabled;
+                }
                 EarthStateName = _consented ? "LocationPermissionNotGranted" : "GeospatialNotEnabledByUser";
                 return;
             }
@@ -83,7 +90,11 @@ namespace FantasyEarth.App
                 EarthStateName = support == FeatureSupported.Unsupported ? "GeospatialUnsupported" : "SessionNotReady";
                 return;
             }
-            if (_runtimeConfig != null) _runtimeConfig.GeospatialMode = GeospatialMode.Enabled;
+            if (_runtimeConfig != null)
+            {
+                _runtimeConfig.GeospatialMode = GeospatialMode.Enabled;
+                _runtimeConfig.StreetscapeGeometryMode = StreetscapeGeometryMode.Enabled;
+            }
             EarthState earthState = earthManager.EarthState;
             EarthStateName = earthState.ToString();
             bool tracking = earthState == EarthState.Enabled && earthManager.EarthTrackingState == TrackingState.Tracking;

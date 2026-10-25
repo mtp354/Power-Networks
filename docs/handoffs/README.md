@@ -8,12 +8,14 @@ Prepared 2026-10-25 from commit `d1fec0c`. These briefs are implementation instr
 
 **Latest development checkpoint:** Tasks 9 and 10's code, the camera dependency
 repair, reusable building generation, and the offline building-data/matching
-slice are implemented. The latest suite has 153 passing Unity cases and eight
+slice are implemented. The latest suite has 159 passing Unity cases and eight
 passing importer cases. Plan 1 device acceptance is now complete: the outdoor
 follow-up recorded 82 Locked samples, first lock at 74.906 seconds and locked
-medians 0.88 m / 1.36°. Live building placement/Streetscape lifecycle wiring, ground props and the
-map view remain. Follow the [data/matching report](reports/building-data-matching.md)
-for the next integration work rather than redispatching these historical briefs.
+medians 0.88 m / 1.36°. A first live Streetscape placement build with temporary
+session identities is now implemented and installed; outdoor physical placement
+validation remains. Stable map integration, ground props and the map view follow.
+See the [live-placement report](reports/live-building-placement.md) and
+[data/matching report](reports/building-data-matching.md); do not redispatch these historical briefs.
 
 | Brief | Difficulty | Prerequisites | Scope |
 |---|---|---|---|

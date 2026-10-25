@@ -70,6 +70,9 @@ public static class BuildWorldScene
         extensions.CameraManager = cameraManager;
         extensions.ARCoreExtensionsConfig = AssetDatabase.LoadAssetAtPath<ARCoreExtensionsConfig>(
             "Assets/FantasyEarth/App/ARCoreExtensionsConfig.asset");
+        extensions.ARCoreExtensionsConfig.StreetscapeGeometryMode=StreetscapeGeometryMode.Enabled;
+        EditorUtility.SetDirty(extensions.ARCoreExtensionsConfig);
+        camera.farClipPlane=250;
 
         var library = AssetDatabase.LoadAssetAtPath<BiomeLookLibrary>(
             "Assets/FantasyEarth/Rendering/BiomeLooks/BiomeLookLibrary.asset");
@@ -116,11 +119,17 @@ public static class BuildWorldScene
         var logger = app.AddComponent<SessionLogger>();
         var overlay = app.AddComponent<DiagnosticsOverlay>();
         var presenter = app.AddComponent<WorldPresenter>();
+        var buildings = app.AddComponent<LiveBuildingController>();
+        var buildingLayer = app.AddComponent<ObservedBuildingLayer>();
         Set(sampler, "earthManager", earth); Set(sampler, "extensions", extensions);
         Set(climate, "koppenGrid", AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/FantasyEarth/Data/koppen_1991_2020_0p1.bytes"));
         Set(look, "library", library); Set(look, "volume", volume); Set(look, "motes", motes);
         Set(presenter, "sampler", sampler); Set(presenter, "climate", climate); Set(presenter, "look", look); Set(presenter, "logger", logger);
         Set(overlay, "presenter", presenter);
+        Set(buildings,"sampler",sampler); Set(buildings,"presenter",presenter);
+        Set(buildings,"origin",origin); Set(buildings,"layer",buildingLayer);
+        Set(buildings,"buildingMaterial",AssetDatabase.LoadAssetAtPath<Material>("Assets/FantasyEarth/Rendering/Buildings/StorybookBuilding.mat"));
+        Set(overlay,"buildings",buildings);
         const string path = "Assets/FantasyEarth/Scenes/World.unity";
         EditorSceneManager.SaveScene(scene, path);
         EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(path, true) };
