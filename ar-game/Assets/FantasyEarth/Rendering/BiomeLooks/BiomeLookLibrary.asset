@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3c1d13fe182175fa1f773bc92a25af, type: 3}
+  m_Name: BiomeLookLibrary
+  m_EditorClassIdentifier: FantasyEarth.Rendering::FantasyEarth.Rendering.BiomeLookLibrary
+  Entries:
+  - Biome: 0
+    Look: {fileID: 11400000, guid: d57ec57abbb4d02c4844a6bd733b3478, type: 2}
+  - Biome: 1
+    Look: {fileID: 11400000, guid: d0b40794dfa8dfb8ab3885f65ffb4900, type: 2}
+  - Biome: 2
+    Look: {fileID: 11400000, guid: 92d9c80fbe2ff4d3288267252eff7964, type: 2}
+  - Biome: 3
+    Look: {fileID: 11400000, guid: 5a4c2e0f799c099c193839a6ad9f042a, type: 2}

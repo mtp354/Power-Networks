@@ -1,0 +1,14 @@
+{
+    "name": "FantasyEarth.Rendering",
+    "rootNamespace": "FantasyEarth.Rendering",
+    "references": ["FantasyEarth.Fantasy", "Unity.RenderPipelines.Core.Runtime", "Unity.RenderPipelines.Universal.Runtime"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
