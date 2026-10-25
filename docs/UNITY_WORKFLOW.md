@@ -91,3 +91,7 @@ The APK is installed on the authorized Galaxy S25. The owner confirmed live came
 ## Alignment calibration follow-up
 
 The owner authorized field-based calibration after the first walk. The horizontal entry limit is now **2.0 m**, retaining the 2° yaw limit and 1-second dwell. **121/121 EditMode cases pass.** Development build `build_f418eec5f7d0` succeeded, installed on the S25 and launched without observed application errors. The original field run remains a zero-lock result; the replay predicts a sustained lock at 2.0 m but requires fresh device confirmation. See the [calibration report](handoffs/reports/alignment-calibration-report.md).
+
+## Camera repair and building-generation slice
+
+The black camera/session regression was traced to missing Java location/auth dependencies in the incremental APK. Explicit persistent Gradle dependencies and `Tools/diagnostics/verify_geospatial_apk.py` now guard that path; the owner confirmed live camera video is restored. Alignment fine-tuning is deferred by request. The next completed slice adds reusable deterministic building geometry and an offline `BuildingPreview.unity` scene. All 134 EditMode cases pass, and the saved preview automatically reconstructs 12 meshes. See the [building report](handoffs/reports/building-generation-slice.md).

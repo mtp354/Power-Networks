@@ -12,6 +12,6 @@ Validation:
 - APK size: 53,643,233 bytes; SHA-256: `508450cbecdc4423eeaa2723a10d06a8ae44bb731885b28d21c862daee71092d`.
 - `Tools/diagnostics/verify_geospatial_apk.py` uses Android SDK `dexdump` to verify actual class definitions for `FusedLocationProviderClient` and `GoogleAuthUtil`, rather than string references or dependency markers. Both are present in the repaired APK. A markers-only negative fixture is rejected.
 - Installed and launched on the S25. The specific missing-library/configuration-pause errors are absent in the new process. Native depth/feature warnings remain; no claim is made that all native diagnostics are quiet.
-- Visual camera confirmation is pending owner feedback. No additional outdoor test was requested; alignment tuning is deferred at the owner's request.
+- The owner confirmed live camera video is back indoors after installing this repair. No additional outdoor test was requested; alignment tuning is deferred at the owner's request.
 
 Run the APK dependency verifier after every future Android build. The pure C# suite remains at 121 passed cases; this Gradle-only fix was validated by the actual APK and device rather than repeating unchanged EditMode tests.

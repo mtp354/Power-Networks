@@ -17,3 +17,5 @@ Replay assumes each preceding sample holds until the next approximately 2 Hz rec
 Replay on all 1,797 coordinate-free samples: 1.5 m and 1.75 m produce no predicted lock; 2.0 m produces one predicted lock transition and 184 locked sample records (median 1.90 m / 1.50°). 2.25 m adds only one predicted locked record. Select 2.0 m as the smallest tested supported candidate; verify on device before treating it as accepted.
 
 Regression result: the old 1.5 m gate fails the two measured S25 cases and the new 2 m boundary. After selecting 2.0 m, all 121 FantasyEarth EditMode cases pass, including yaw rejection, dwell, hysteresis, invalid accuracy and immediate tracking-loss behavior.
+
+Owner steering: after the second attempt exposed a black camera dependency regression, the owner explicitly deferred alignment fine-tuning and requested progress on other tasks. The dependency repair is installed and camera video is confirmed restored. Keep actual lock acceptance pending; do not request another walk as part of the building-generation slice.
