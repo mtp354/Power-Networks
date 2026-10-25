@@ -1,6 +1,6 @@
 # S25 alignment calibration — 2026-10-25
 
-Status: calibration, automated validation, APK build and installation complete; fresh device lock acceptance pending.
+Status: complete. The owner observed an outdoor lock, confirmed by coordinate-redacted device records on the camera-repaired calibrated APK. Task 10 Step 5 and the fresh-device calibration check pass.
 
 ## Decision
 
@@ -48,10 +48,48 @@ unity command script run --file AgentScripts/ReplayAlignment.cs --entry ReplayAl
 
 The script writes only its aggregate predictions to ignored `Temp/alignment-calibration-results.json`. It uses Pipeline's existing editor JSON dependency; the player package dependencies are unchanged.
 
-## Remaining acceptance
+## Initial acceptance request (historical)
 
-The updated APK is installed and smoke-tested. Verify an actual lock with precise location enabled, preferably where the first walk reached about 2 m horizontal / 2° yaw. Record locked horizontal/yaw medians and time to first lock from that new session. Keep Task 10 Step 5 and the calibration device check open until an actual new-build lock is observed.
+At this checkpoint the updated APK was installed and smoke-tested, but an actual lock with precise location enabled remained required. Task 10 Step 5 and the calibration device check stayed open until the later successful run below.
 
 ## Device follow-up and deferral
 
-The fresh field attempt failed with a black camera/session pause. Native evidence showed missing location/auth dependencies in the incremental APK, rather than a threshold failure. The [dependency fix](camera-dependency-fix.md) is installed. The owner requested that alignment fine-tuning be deferred while other game work proceeds. Actual lock acceptance remains unverified.
+The next field attempt failed with a black camera/session pause. Native evidence showed missing location/auth dependencies in the incremental APK, rather than a threshold failure. The [dependency fix](camera-dependency-fix.md) was installed. The owner requested alignment fine-tuning be deferred while other game work proceeded, then volunteered another outdoor test.
+
+## Successful device acceptance — 2026-10-25
+
+The owner returned and confirmed `Alignment: Locked`. After pausing the app to
+flush its writer, the existing diagnostic tool removed coordinates on Android
+before transferring records for analysis. Every one of the **240** records in
+session `20261025-200409.jsonl` parses as valid sanitized JSON.
+
+| Measurement | Actual device result |
+| --- | --- |
+| Locked records | **82** |
+| Time to first lock, from first session record | **74.906 seconds** |
+| Locked horizontal accuracy median | **0.88 m** |
+| Locked yaw accuracy median | **1.36°** |
+| Observed locked intervals | **41.958 seconds** |
+| Lock transitions | 1 |
+| Maximum recorded locked blend | 1.0 |
+
+The installed APK SHA-256 was checked directly on the phone and matches repaired
+build `build_99fecdc2f11b`,
+`508450cbecdc4423eeaa2723a10d06a8ae44bb731885b28d21c862daee71092d`.
+The newer building-data development APK was not installed for this test.
+
+The session spans 923.004 seconds but contains a **799.970-second sampling gap**.
+Observed locked duration sums only consecutive intervals of at most 1.25 seconds;
+the gap is excluded. The next sample after the gap is `SessionNotReady`, tracking
+false and unlocked. The final record has Earth enabled/tracking and is unlocked.
+This establishes successful lock and a recorded unlock on lost tracking, without
+claiming continuous lock or continuous app operation through the missing interval.
+
+The original zero-lock run and replay predictions remain historical evidence.
+This fresh run passes the configured 2 m / 2° gate, but does not establish that
+2 m is the optimal threshold: observed locked accuracy was also better than the
+old horizontal limit. No further threshold change is needed for this acceptance.
+Physical alignment of rebuilt buildings remains untested because live building
+placement has not been integrated.
+
+See [the coordinate-free aggregate](alignment-lock-field-summary.json).

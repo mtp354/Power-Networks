@@ -18,7 +18,9 @@ Thin MonoBehaviours in `App` read ARCore and drive rendering. A URP Render Graph
 
 ## Execution status — 2026-10-25
 
-Tasks **1–8 are implemented**. Tasks 9–10 remain outside this completed checkpoint.
+Tasks **1–10 are complete**, including fresh-device alignment lock acceptance on
+the camera-repaired calibrated APK. Rebuilt building placement and the map remain
+later-plan work.
 
 | Task | Status | Implementation commit / evidence |
 |---|---|---|
@@ -30,12 +32,12 @@ Tasks **1–8 are implemented**. Tasks 9–10 remain outside this completed chec
 | 6: climate dataset/model | Complete | `e7fb32b`, cache-verification follow-up `a17bf03`; generated 6,480,000-byte LFS asset, attribution, Python and real-location tests |
 | 7: alignment gate | Complete | `da14188`; 36 additional EditMode cases |
 | 8: session formatter | Complete | `649bea8`; 17 additional EditMode cases |
-| 9: painted rendering | Not started | Next implementation task |
-| 10: World scene/device run | Not started | After Task 9 |
+| 9: painted rendering | Complete | `12f6204`; four biome previews and device camera checks |
+| 10: World scene/device run | Complete | `2ef32e1`, calibration `53b0743`, camera repair `b1a4b24`; 82 actual Locked records, first lock 74.906 s, median 0.88 m / 1.36° |
 
-The latest suite contains **108 passing EditMode cases**, with zero failures/skips. See `docs/handoffs/reports/` for completion reports and `docs/UNITY_WORKFLOW.md` for the working Editor connection. Older Tasks 1–5 checkboxes below are the original historical checklist; the status table and reports establish their current state. Tasks 6–8 checkboxes were updated during this execution.
+The latest source suite contains **153 passing EditMode cases**, with zero failures/skips, including later building-data work. The device acceptance used the earlier camera-repaired calibrated APK, not the newer uninstalled building-data APK. See `docs/handoffs/reports/` for completion reports and `docs/UNITY_WORKFLOW.md` for the working Editor connection. Older Tasks 1–5 checkboxes below are the original historical checklist; the status table and reports establish their current state.
 
-Accepted setup adjustments supersede the original instructions below: Android minimum API **25**; use the **EDM4U bundled with ARCore Extensions**, with no duplicate OpenUPM package; retain installed iOS Build Support for Extensions' editor code. Session JSON additionally writes null for null EarthState or non-finite blend values to preserve JSON validity. No Task 9 rendering, Task 10 scene, cloud, or device work is claimed here.
+Accepted setup adjustments supersede the original instructions below: Android minimum API **25**; use the **EDM4U bundled with ARCore Extensions**, with no duplicate OpenUPM package; retain installed iOS Build Support for Extensions' editor code. Session JSON additionally writes null for null EarthState or non-finite blend values to preserve JSON validity. The calibrated horizontal entry limit is **2.0 m**, with the original 2° yaw and 1-second dwell retained. Actual lock evidence is in `docs/handoffs/reports/alignment-lock-field-summary.json`.
 
 ## Global Constraints
 
@@ -463,11 +465,11 @@ Scene contents:
 Run: `unity command build run --target Android --outputPath Builds/fantasy-earth-dev.apk --options '["Development"]' --confirm --project-path "$PROJ"`, poll `build status` until it's completed and succeeded, then run `adb install -r "$PROJ/Builds/fantasy-earth-dev.apk"` and `adb shell monkey -p com.mtp354.fantasyearth -c android.intent.category.LAUNCHER 1`.
 Expected: the app opens straight into the camera with the painted look. After a three-finger tap, the overlay shows `earth: Enabled`.
 
-- [ ] **Step 5: Device checks (owner and implementer)**
+- [x] **Step 5: Device checks (owner and implementer)**
 
-  - **Authorized follow-up:** the owner requested calibration after the first walk. The current entry default is 2.0 m / 2° for 1 second; original Task 7 numbers are historical starting values. Replay predicts a sustained lock, 121 tests pass, and the updated APK is installed. A fresh actual device lock is still required. See `docs/superpowers/plans/2026-10-25-fantasy-earth-alignment-calibration.md`.
+  - **Accepted follow-up:** the current entry default is 2.0 m / 2° for 1 second; original Task 7 numbers are historical starting values. On the repaired calibrated APK the owner observed lock and the paused log confirms 82 Locked records, first lock at 74.906 seconds and locked medians 0.88 m / 1.36°. Observed locked intervals total 41.958 seconds, excluding a 799.970-second unsampled gap. See `docs/handoffs/reports/alignment-lock-field-summary.json`.
 
-  - **2026-10-25 result:** owner completed the outdoor walk; live camera, three-finger diagnostics, Earth tracking and startup-fix stability passed. The paused session has 1,797 valid records, 1,099 tracking records and 0 Locked records. Best paired accuracy: 1.87 m / 1.41°; no sampled pair met both default entry limits. Step remains open. See `docs/handoffs/reports/task-10-report.md` and its aggregate JSON evidence.
+  - **First walk (historical):** live camera, diagnostics, Earth tracking and startup-fix checks passed. That session had 1,797 valid records, 1,099 tracking records and 0 Locked records; best paired accuracy was 1.87 m / 1.41°. Its original failed lock result remains preserved in `docs/handoffs/reports/task-10-report.md`; the fresh follow-up above completes acceptance.
   - Deny location permission on first launch: the app still shows the painted Temperate look, the overlay shows a non-Enabled earth state or no tracking, and it doesn't crash (`adb logcat -d | grep -c "FATAL EXCEPTION"` → 0).
   - Grant permission and go outdoors on a Street View-covered street for about 5 minutes, walking and panning: the overlay shows accuracies falling and `alignment: Locked` at least once, with no crash.
   - Pause the app with Home, wait for its writer to flush, then analyze with `python3 ar-game/Tools/diagnostics/summarize_session.py --serial DEVICE_SERIAL`. The tool removes coordinates on Android before reading the records; raw logs stay on the phone. See `docs/FANTASY_EARTH_DEVICE_TESTING.md`.

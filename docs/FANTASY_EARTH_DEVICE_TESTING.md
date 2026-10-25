@@ -59,6 +59,12 @@ A three-finger tap toggles the development overlay. It shows Earth state, tracki
 
 With precise location allowed, go outdoors on a Street View-covered street for about five minutes, walking and panning. Look for `Earth: Enabled`, improving accuracies and `Alignment: Locked` at least once. The current gate defaults require horizontal accuracy ≤2.0 m and yaw accuracy ≤2° for 1 second. The 2.0 m horizontal entry limit was selected from the first S25 field trace; its fresh-device lock check is tracked in the [calibration report](handoffs/reports/alignment-calibration-report.md). Plan 1 logs alignment; it always renders the painted camera view. Rebuilt buildings and the map are later plans.
 
+This acceptance check passed on 2026-10-25: the owner saw lock, and the repaired
+calibrated APK recorded 82 Locked samples, first lock at 74.906 seconds and locked
+medians 0.88 m / 1.36°. See the [aggregate evidence](handoffs/reports/alignment-lock-field-summary.json).
+No repeat walk is needed to close Plan 1. Later anchored-building acceptance will
+need its own device validation.
+
 `ErrorNotAuthorized` requires checking ARCore API enablement and the Android OAuth package/certificate pair. `Enabled` with no lock can reflect positioning quality or VPS coverage; record the real measurements before tuning thresholds.
 
 ## Inspect measurements without exporting coordinates

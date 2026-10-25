@@ -10,7 +10,7 @@ The baseline is commit `88481b3`: the painted camera, diagnostics and Earth trac
 - [x] Apply the smallest supported horizontal limit and pass all Unity EditMode tests.
 - [x] Build, install and smoke-test the updated development APK. Preserve consent and private session logs.
 - [x] Record the selected threshold, replay assumptions, tests and APK identity. Commit the implementation.
-- [ ] Verify an actual lock on the updated build and record measured locked medians and time to first lock. Replay predictions do not complete this step.
+- [x] Verify an actual lock on the updated build and record measured locked medians and time to first lock. Replay predictions do not complete this step.
 
 Replay assumes each preceding sample holds until the next approximately 2 Hz record, using 0.1-second gate updates. Gaps greater than 1.25 seconds reset tracking. This checks the implementation against recorded measurements but cannot reconstruct intermediate frames or prove world alignment. No coordinate data is included in replay input or committed results.
 
@@ -18,4 +18,12 @@ Replay on all 1,797 coordinate-free samples: 1.5 m and 1.75 m produce no predict
 
 Regression result: the old 1.5 m gate fails the two measured S25 cases and the new 2 m boundary. After selecting 2.0 m, all 121 FantasyEarth EditMode cases pass, including yaw rejection, dwell, hysteresis, invalid accuracy and immediate tracking-loss behavior.
 
-Owner steering: after the second attempt exposed a black camera dependency regression, the owner explicitly deferred alignment fine-tuning and requested progress on other tasks. The dependency repair is installed and camera video is confirmed restored. Keep actual lock acceptance pending; do not request another walk as part of the building-generation slice.
+Historical owner steering: after the second attempt exposed a black camera dependency regression, the owner deferred alignment fine-tuning and requested progress on other tasks. After repair, camera video was restored. Lock acceptance stayed pending during the building-generation slice; the owner later volunteered the successful walk below.
+
+Completed follow-up: the owner volunteered a new walk and confirmed lock.
+Session `20261025-200409.jsonl` has 240 valid coordinate-redacted records, 82 Locked,
+first lock at 74.906 seconds and locked medians 0.88 m / 1.36°. The installed APK
+hash matches the camera-repaired calibrated build. Observed locked intervals total
+41.958 seconds, excluding a 799.970-second logging gap. Actual device acceptance
+is complete; no additional threshold change was made. See the
+[aggregate evidence](../../handoffs/reports/alignment-lock-field-summary.json).

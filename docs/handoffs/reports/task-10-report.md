@@ -1,6 +1,6 @@
 # Task 10 — World scene and first Android run
 
-Status: implementation, build, installation and outdoor run complete; the required lock criterion was not met. Task 10 Step 5 remains open.
+Status: complete. The first walk failed the original lock threshold; a later walk on the calibrated, camera-repaired APK recorded 82 Locked samples and the owner confirmed seeing lock. Task 10 Step 5 now passes; historical runs remain documented below.
 
 ## Implementation
 
@@ -49,12 +49,28 @@ Accuracy converged late in the session: the minute-13 medians were 1.88 m / 1.44
 
 This evidence supports a successful camera/Geospatial integration and a failed strict lock acceptance check. It does not establish a gate logic defect. The aggregate evidence is saved in [task-10-field-summary.json](task-10-field-summary.json); precise coordinates remain on the phone.
 
-## Remaining acceptance
+## First-run acceptance decision (historical)
 
-Keep Task 10 Step 5 open until an actual `Locked` sample is recorded, or the owner explicitly accepts revised criteria. The approved plan places threshold tuning in Plan 2. The late-run measurements suggest evaluating a 2.0 m horizontal entry limit while retaining the 2° yaw requirement during that tuning; this is an inference from one run, and has not been applied or validated. Camera-only Plan 1 remains testable with the current build.
+At this checkpoint Task 10 Step 5 remained open until an actual `Locked` sample was recorded. The late-run measurements suggested evaluating a 2.0 m horizontal entry limit while retaining the 2° yaw requirement. Calibration and fresh-device acceptance subsequently completed as described below.
 
 See [the device guide](../../FANTASY_EARTH_DEVICE_TESTING.md) for reproducible commands and coordinate-safe analysis. APKs, raw session logs and credential downloads remain uncommitted.
 
 ## Authorized calibration follow-up
 
-After this field result, the owner authorized the next calibration step. The default horizontal entry limit is now 2.0 m, selected by replay of the actual gate against coordinate-free accuracy data; yaw, dwell and exit behavior remain as above. The new APK is installed; 121 Unity EditMode cases passed before building. This preserves the original run as evidence: its 0 actual locks have not been changed into replay predictions. See [the calibration report](alignment-calibration-report.md) for the current build and remaining fresh-device check.
+After this field result, the owner authorized the next calibration step. The default horizontal entry limit is now 2.0 m, selected by replay of the actual gate against coordinate-free accuracy data; yaw, dwell and exit behavior remain as above. Before that build, 121 Unity EditMode cases passed. This preserves the original run as evidence: its 0 actual locks have not been changed into replay predictions. See [the calibration report](alignment-calibration-report.md) for the repaired APK and completed fresh-device check.
+
+## Final outdoor acceptance — 2026-10-25
+
+The owner reported successful alignment lock on the repaired calibrated APK.
+Phone-side coordinate redaction and the paused, flushed session log independently
+confirm **82 Locked records out of 240**, first lock at **74.906 seconds**, and
+locked medians of **0.88 m horizontal / 1.36° yaw**. Observed locked intervals total
+41.958 seconds, excluding the 799.970-second sampling gap. The installed APK hash
+matches camera repair build `build_99fecdc2f11b`; the subsequent building-data APK
+was not installed. The running process was still present at collection, but no
+continuous-process or continuous-lock claim is made across the unsampled interval.
+
+Together with prior camera, permission-fallback, diagnostics and startup checks,
+this completes Plan 1's required device acceptance. It does not validate physical
+placement of rebuilt buildings. See [the measured aggregate](alignment-lock-field-summary.json)
+and [calibration report](alignment-calibration-report.md) for exact evidence.

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-25",
+  "device": "Galaxy S25 SM-S931U1",
+  "developmentBuild": "build_99fecdc2f11b",
+  "installedApkSha256": "508450cbecdc4423eeaa2723a10d06a8ae44bb731885b28d21c862daee71092d",
+  "session": "20261025-200409.jsonl",
+  "collection": "App paused with Home; lat/lon removed on Android before transfer; only aggregate statistics committed.",
+  "enterThresholds": {
+    "horizontalM": 2.0,
+    "yawDeg": 2.0,
+    "dwellSeconds": 1.0
+  },
+  "records": 240,
+  "lockedRecords": 82,
+  "firstLockSeconds": 74.906,
+  "medianLockedHorizontalM": 0.88,
+  "medianLockedYawDeg": 1.36,
+  "earthStates": [
+    "Enabled",
+    "SessionNotReady"
+  ],
+  "sessionSpanSeconds": 923.004,
+  "trackingRecords": 234,
+  "earthStateCounts": {
+    "SessionNotReady": 4,
+    "Enabled": 236
+  },
+  "lockTransitions": 1,
+  "unlockTransitions": 1,
+  "observedLockedSeconds": 41.958,
+  "durationMethod": "Sum intervals starting in Locked only when consecutive samples are at most 1.25 seconds apart; no claim across larger gaps.",
+  "gapsOver1_25Seconds": 1,
+  "largestGapSeconds": 799.97,
+  "maximumLockedBlend": 1.0,
+  "finalState": {
+    "alignment": "Unlocked",
+    "earth": "Enabled",
+    "tracking": true
+  },
+  "ownerConfirmedAlignmentLocked": true,
+  "acceptance": "Pass: actual lock observed and recorded on the repaired calibrated APK; Task 10 Step 5 and calibration device check complete.",
+  "limitations": [
+    "One device/session; no continuous lock or app-state claim across the unsampled interval.",
+    "No anchored building rendering, physical overlay error measurement, or neighborhood performance validation."
+  ]
+}

@@ -108,3 +108,14 @@ the required location/auth Java definitions remain present. No APK was installed
 or ADB command sent during this work. Live tile acquisition, geographic placement,
 Streetscape lifecycle wiring and anchored rendering remain. See the
 [data/matching report](handoffs/reports/building-data-matching.md).
+
+## Plan 1 device acceptance completed
+
+The owner returned from a fresh walk and confirmed alignment lock. The existing
+phone-side coordinate redaction tool validated 240 JSON records, including 82
+Locked samples. First lock was at 74.906 seconds; locked medians were 0.88 m / 1.36°.
+Observed locked intervals total 41.958 seconds, excluding a 799.970-second logging
+gap. The installed APK hash still matches repaired calibrated build
+`build_99fecdc2f11b`; the building-data APK remains uninstalled. Task 10 Step 5 and
+calibration acceptance are complete. See the
+[measured aggregate](handoffs/reports/alignment-lock-field-summary.json).

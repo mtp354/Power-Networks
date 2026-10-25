@@ -113,6 +113,8 @@ Streetscape Geometry in the app or place these meshes over the camera.
 4. Feed canonical identity/footprints into the existing building renderer and
    alignment presentation gate; handle tile/session removal and origin changes.
    Then validate physical placement, camera stability and no-wobble behavior on
-   the device. Actual lock acceptance still depends on the owner's current walk.
+   the device. Plan 1 lock acceptance subsequently passed in the owner's walk;
+   see [the measured aggregate](alignment-lock-field-summary.json). Physical
+   building-placement acceptance remains separate.
 5. Add deterministic ground props, the map/avatar view and the view-switch
    gesture. Dense neighborhood generation and device rendering remain unprofiled.
