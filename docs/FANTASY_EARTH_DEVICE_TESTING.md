@@ -22,7 +22,13 @@ unity command build run --target Android --outputPath Builds/fantasy-earth-dev.a
 unity command build status --project-path "$PROJ" --format json
 ```
 
-Poll `build status` until `completed` and `Succeeded`. This installed CLI requires a JSON array for `--options`. Then:
+Poll `build status` until `completed` and `Succeeded`. This installed CLI requires a JSON array for `--options`. Verify the required Geospatial Java class definitions in every APK before installation, including incremental builds:
+
+```bash
+python3 "$PROJ/Tools/diagnostics/verify_geospatial_apk.py" "$PROJ/Builds/fantasy-earth-dev.apk"
+```
+
+Then:
 
 ```bash
 adb devices -l
@@ -30,7 +36,7 @@ adb -s DEVICE_SERIAL install -r "$PROJ/Builds/fantasy-earth-dev.apk"
 adb -s DEVICE_SERIAL shell am start -W -n com.mtp354.fantasyearth/com.unity3d.player.UnityPlayerGameActivity
 ```
 
-Only `Assets/FantasyEarth/Scenes/World.unity` is in the build list. `Builds/` is ignored. The Android resolver may insert temporary Gradle dependency blocks and XR packages may insert preloaded assets during a build; inspect the diff before committing those generated changes.
+Only `Assets/FantasyEarth/Scenes/World.unity` is in the build list. `Builds/` is ignored. The Android resolver may insert temporary Gradle dependency blocks and XR packages may insert preloaded assets during a build. Keep the explicit location/auth dependencies outside resolver-managed blocks in `mainTemplate.gradle`: cached resolver passes can otherwise omit them from incremental APKs. Inspect generated changes before committing.
 
 ## Permissions and camera fallback
 

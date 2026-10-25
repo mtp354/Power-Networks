@@ -51,3 +51,7 @@ The script writes only its aggregate predictions to ignored `Temp/alignment-cali
 ## Remaining acceptance
 
 The updated APK is installed and smoke-tested. Verify an actual lock with precise location enabled, preferably where the first walk reached about 2 m horizontal / 2° yaw. Record locked horizontal/yaw medians and time to first lock from that new session. Keep Task 10 Step 5 and the calibration device check open until an actual new-build lock is observed.
+
+## Device follow-up and deferral
+
+The fresh field attempt failed with a black camera/session pause. Native evidence showed missing location/auth dependencies in the incremental APK, rather than a threshold failure. The [dependency fix](camera-dependency-fix.md) is installed. The owner requested that alignment fine-tuning be deferred while other game work proceeds. Actual lock acceptance remains unverified.

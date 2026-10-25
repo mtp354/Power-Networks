@@ -5,6 +5,10 @@ apply from: '../shared/common.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // ARCore Geospatial and keyless auth need these even when the resolver skips a cached build.
+    // Keep them outside resolver-managed blocks; versions match the last working APK.
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.android.gms:play-services-auth-base:16.0.0'
 **DEPS**}
 
 android {
