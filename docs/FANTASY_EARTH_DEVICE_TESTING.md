@@ -51,7 +51,7 @@ To test denied-location fallback after consent has been recorded, use Android Se
 
 A three-finger tap toggles the development overlay. It shows Earth state, tracking, horizontal/yaw accuracy, alignment, blend, climate class and biome. It does not display coordinates. In a non-development build the overlay and session logger are disabled.
 
-With precise location allowed, go outdoors on a Street View-covered street for about five minutes, walking and panning. Look for `Earth: Enabled`, improving accuracies and `Alignment: Locked` at least once. The current gate defaults require horizontal accuracy ≤1.5 m and yaw accuracy ≤2° for 2 seconds. Plan 1 logs alignment; it always renders the painted camera view. Rebuilt buildings and the map are later plans.
+With precise location allowed, go outdoors on a Street View-covered street for about five minutes, walking and panning. Look for `Earth: Enabled`, improving accuracies and `Alignment: Locked` at least once. The current gate defaults require horizontal accuracy ≤1.5 m and yaw accuracy ≤2° for 1 second. Plan 1 logs alignment; it always renders the painted camera view. Rebuilt buildings and the map are later plans.
 
 `ErrorNotAuthorized` requires checking ARCore API enablement and the Android OAuth package/certificate pair. `Enabled` with no lock can reflect positioning quality or VPS coverage; record the real measurements before tuning thresholds.
 

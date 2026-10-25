@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-25",
+  "commit": "2ef32e1",
+  "developmentBuild": "build_e3218f132aec",
+  "device": "Galaxy S25 SM-S931U1",
+  "session": "20261025-182606.jsonl",
+  "sessionIncludes": "Startup, owner outdoor walk, and indoor return; not an outdoor-only interval.",
+  "records": 1797,
+  "sessionSpanSeconds": 1101.927,
+  "trackingRecords": 1099,
+  "earthStateCounts": {
+    "SessionNotReady": 697,
+    "ErrorEarthNotReady": 1,
+    "Enabled": 1099
+  },
+  "enterThresholds": {
+    "horizontalM": 1.5,
+    "yawDeg": 2.0,
+    "dwellSeconds": 1.0
+  },
+  "qualifyingSampleRecords": 0,
+  "lockedRecords": 0,
+  "firstLockSeconds": null,
+  "medianLockedHorizontalM": null,
+  "medianLockedYawDeg": null,
+  "trackingHorizontalM": {
+    "min": 0.68,
+    "median": 7.21,
+    "p90": 146.26,
+    "max": 160.56
+  },
+  "trackingYawDeg": {
+    "min": 1.38,
+    "median": 37.69,
+    "p90": 43.07,
+    "max": 87.65
+  },
+  "bestPairedAccuracy": {
+    "hAcc": 1.87,
+    "yawAcc": 1.41
+  },
+  "ownerConfirmed": {
+    "liveCameraUpdating": true,
+    "threeFingerDiagnosticsWorking": true
+  },
+  "nativeCrashAfterStartupFixObserved": false,
+  "acceptance": "Lock criterion not met; Task 10 Step 5 remains open."
+}

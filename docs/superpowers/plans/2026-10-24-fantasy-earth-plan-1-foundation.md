@@ -464,6 +464,8 @@ Run: `unity command build run --target Android --outputPath Builds/fantasy-earth
 Expected: the app opens straight into the camera with the painted look. After a three-finger tap, the overlay shows `earth: Enabled`.
 
 - [ ] **Step 5: Device checks (owner and implementer)**
+
+  - **2026-10-25 result:** owner completed the outdoor walk; live camera, three-finger diagnostics, Earth tracking and startup-fix stability passed. The paused session has 1,797 valid records, 1,099 tracking records and 0 Locked records. Best paired accuracy: 1.87 m / 1.41°; no sampled pair met both default entry limits. Step remains open. See `docs/handoffs/reports/task-10-report.md` and its aggregate JSON evidence.
   - Deny location permission on first launch: the app still shows the painted Temperate look, the overlay shows a non-Enabled earth state or no tracking, and it doesn't crash (`adb logcat -d | grep -c "FATAL EXCEPTION"` → 0).
   - Grant permission and go outdoors on a Street View-covered street for about 5 minutes, walking and panning: the overlay shows accuracies falling and `alignment: Locked` at least once, with no crash.
   - Pause the app with Home, wait for its writer to flush, then analyze with `python3 ar-game/Tools/diagnostics/summarize_session.py --serial DEVICE_SERIAL`. The tool removes coordinates on Android before reading the records; raw logs stay on the phone. See `docs/FANTASY_EARTH_DEVICE_TESTING.md`.

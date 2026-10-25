@@ -1,6 +1,6 @@
 # Task 10 — World scene and first Android run
 
-Status: implementation, build and installation complete; outdoor lock acceptance pending.
+Status: implementation, build, installation and outdoor run complete; the required lock criterion was not met. Task 10 Step 5 remains open.
 
 ## Implementation
 
@@ -27,10 +27,30 @@ Status: implementation, build and installation complete; outdoor lock acceptance
 
 The first build crashed seven seconds into its first launch while camera permission was pending. Matching IL2CPP debug symbols place the native call in Extensions 1.57's `ReportGeospatialCreatorPlatformWithDelay`, through `EarthApi.ReportGeospatialCreatorPlatform`. The SDK waits at most 60 frames for a native session, then invokes the native function even when no session is available. The same build ran after the camera permission had been granted.
 
-The application now delays enabling Extensions until the camera AR session is tracking and Geospatial consent/permission are present. This preserves camera-only AR without modifying vendor packages. The scene regression test first failed against the enabled-at-start scene, then passed after the targeted scene correction. A rebuilt APK survives the delayed camera prompt. Positive-consent device regression and outdoor lock are still being checked.
+The application now delays enabling Extensions until the camera AR session is tracking and Geospatial consent/permission are present. This preserves camera-only AR without modifying vendor packages. The scene regression test first failed against the enabled-at-start scene, then passed after the targeted scene correction. A rebuilt APK survives the delayed camera prompt. The updated APK also survived the owner's positive-consent outdoor run in the same process, with Earth tracking and no new crash. The lock criterion was not met because no sampled accuracy pair satisfied both entry limits.
+
+## Outdoor run result — 2026-10-25
+
+The owner completed the walk and confirmed the live camera kept updating and the three-finger diagnostics panel worked. The updated app remained in the same process through the walk and return. No new native crash or application Unity/AndroidRuntime error was observed; the crash buffer retains only the earlier pre-fix failure.
+
+After pausing and flushing, the coordinate-redacted snapshot of session `20261025-182606.jsonl` contains **1,797 valid records**, including **1,099 Earth-tracking records**. The session spans 1,101.927 seconds and includes startup and the indoor return, so whole-session accuracy statistics must not be interpreted as outdoor-only measurements.
+
+| Measurement | Result |
+| --- | --- |
+| Locked records | 0 |
+| Sampled pairs meeting both entry limits | 0 |
+| Best paired accuracy, normalized to the current entry limits | 1.87 m horizontal / 1.41° yaw |
+| Tracking-sample horizontal accuracy, minimum / median | 0.68 m / 7.21 m |
+| Tracking-sample yaw accuracy, minimum / median | 1.38° / 37.69° |
+| Locked horizontal/yaw medians | Unavailable — no lock |
+| Time to first lock | Unavailable — no lock |
+
+Accuracy converged late in the session: the minute-13 medians were 1.88 m / 1.44°, and minute-14 medians were 1.90 m / 1.53°. The current gate requires ≤1.5 m horizontal **and** ≤2° yaw continuously for **1 second**. The individual minimum horizontal and yaw values occurred at different times. None of the logged pairs qualified together; no lock was observed between records either, since alignment transitions force an immediate log entry.
+
+This evidence supports a successful camera/Geospatial integration and a failed strict lock acceptance check. It does not establish a gate logic defect. The aggregate evidence is saved in [task-10-field-summary.json](task-10-field-summary.json); precise coordinates remain on the phone.
 
 ## Remaining acceptance
 
-The owner must finish the updated build's outdoor five-minute walk/pan on a Street View-covered street, with precise location enabled. Record at least one `Locked` sample, median locked horizontal/yaw accuracy and time to first lock. No such measurements are claimed yet. Keep Task 10 Step 5 open until that evidence is available.
+Keep Task 10 Step 5 open until an actual `Locked` sample is recorded, or the owner explicitly accepts revised criteria. The approved plan places threshold tuning in Plan 2. The late-run measurements suggest evaluating a 2.0 m horizontal entry limit while retaining the 2° yaw requirement during that tuning; this is an inference from one run, and has not been applied or validated. Camera-only Plan 1 remains testable with the current build.
 
 See [the device guide](../../FANTASY_EARTH_DEVICE_TESTING.md) for reproducible commands and coordinate-safe analysis. APKs, raw session logs and credential downloads remain uncommitted.
