@@ -1,0 +1,14 @@
+{
+    "name": "FantasyEarth.Positioning",
+    "rootNamespace": "FantasyEarth.Positioning",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
