@@ -1,0 +1,50 @@
+{
+  "evidence": "Prediction only: preceding sample held between approximately 2 Hz records; gaps over 1.25 seconds reset tracking. Requires fresh on-device validation.",
+  "samples": 1797,
+  "candidates": [
+    {
+      "enterHorizontalM": 1.5,
+      "enterYawDeg": 2.0,
+      "enterDwellSeconds": 1.0,
+      "predictedLockedRecords": 0,
+      "predictedLockTransitions": 0,
+      "predictedFirstLockSeconds": null,
+      "predictedMedianLockedHorizontalM": null,
+      "predictedMedianLockedYawDeg": null
+    },
+    {
+      "enterHorizontalM": 1.75,
+      "enterYawDeg": 2.0,
+      "enterDwellSeconds": 1.0,
+      "predictedLockedRecords": 0,
+      "predictedLockTransitions": 0,
+      "predictedFirstLockSeconds": null,
+      "predictedMedianLockedHorizontalM": null,
+      "predictedMedianLockedYawDeg": null
+    },
+    {
+      "enterHorizontalM": 2.0,
+      "enterYawDeg": 2.0,
+      "enterDwellSeconds": 1.0,
+      "predictedLockedRecords": 184,
+      "predictedLockTransitions": 1,
+      "predictedFirstLockSeconds": 811.2370000074505,
+      "predictedMedianLockedHorizontalM": 1.9,
+      "predictedMedianLockedYawDeg": 1.5
+    },
+    {
+      "enterHorizontalM": 2.25,
+      "enterYawDeg": 2.0,
+      "enterDwellSeconds": 1.0,
+      "predictedLockedRecords": 185,
+      "predictedLockTransitions": 1,
+      "predictedFirstLockSeconds": 810.7080000074506,
+      "predictedMedianLockedHorizontalM": 1.9,
+      "predictedMedianLockedYawDeg": 1.5
+    }
+  ],
+  "sourceSession": "20261025-182606.jsonl",
+  "sourceImplementationCommit": "88481b3",
+  "selectedEnterHorizontalM": 2.0,
+  "actualSourceLockedRecords": 0
+}

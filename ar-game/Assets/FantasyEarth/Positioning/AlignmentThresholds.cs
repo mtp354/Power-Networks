@@ -2,7 +2,8 @@ namespace FantasyEarth.Positioning
 {
     public sealed class AlignmentThresholds
     {
-        public double EnterHorizontalM = 1.5;
+        // S25 field accuracy settled near 1.9 m; retain a margin below the 3 m exit limit.
+        public double EnterHorizontalM = 2.0;
         public double EnterYawDeg = 2.0;
         public float EnterDwellS = 1.0f;
         public double ExitHorizontalM = 3.0;

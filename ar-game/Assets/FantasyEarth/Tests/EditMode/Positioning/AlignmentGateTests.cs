@@ -53,6 +53,30 @@ namespace FantasyEarth.Tests.Positioning
             Assert.AreEqual(AlignmentState.Locked, gate.State);
         }
 
+        [TestCase(1.87, 1.41)]
+        [TestCase(1.92, 1.59)]
+        [TestCase(2.0, 2.0)]
+        public void CalibratedS25AccuracyLocksOnlyAfterFullDwell(double horizontal, double yaw)
+        {
+            var gate = MakeGate();
+            var sample = new PositioningSample(true, horizontal, yaw);
+            Step(gate, sample, 9);
+            Assert.AreEqual(AlignmentState.Unlocked, gate.State);
+            Step(gate, sample, 1);
+            Assert.AreEqual(AlignmentState.Locked, gate.State);
+        }
+
+        [TestCase(2.01, 1.41)]
+        [TestCase(1.9, 2.01)]
+        [TestCase(0.68, 2.59)]
+        public void AccuracyOutsideEitherCalibratedLimitDoesNotLock(double horizontal, double yaw)
+        {
+            var gate = MakeGate();
+            Step(gate, new PositioningSample(true, horizontal, yaw), 100);
+            Assert.AreEqual(AlignmentState.Unlocked, gate.State);
+            Assert.AreEqual(0f, gate.RebuiltBlend);
+        }
+
         [Test]
         public void NonGoodSampleResetsEnterDwell()
         {
@@ -187,7 +211,7 @@ namespace FantasyEarth.Tests.Positioning
         public void ThresholdEqualityUsesInclusiveEntryAndExclusiveExit()
         {
             var gate = MakeGate();
-            Step(gate, new PositioningSample(true, 1.5, 2.0), 10);
+            Step(gate, new PositioningSample(true, 2.0, 2.0), 10);
             Assert.AreEqual(AlignmentState.Locked, gate.State);
             Step(gate, new PositioningSample(true, 3.0, 4.0), 20);
             Assert.AreEqual(AlignmentState.Locked, gate.State);
