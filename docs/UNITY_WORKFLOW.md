@@ -132,3 +132,12 @@ S25, preserving consent/data and the camera-confirmed APK for rollback. Initial
 startup has no current-process Unity/crash errors; live geometry/physical placement
 still requires outdoor validation. See the
 [live-placement report](handoffs/reports/live-building-placement.md).
+
+## Shared ground-prop preparation
+
+While the owner tests live buildings, shared geographic prop candidates and
+eligible-ground/building-clearance rules were added without changing World or
+the phone. A reusable chunk renderer supplies four biome looks and separate map
+and camera visibility policies. **175/175 EditMode cases pass**; five synthetic
+GPU previews include 36 props in four shared-material chunks. Terrain adapters and
+live anchoring remain. See the [ground-prop report](handoffs/reports/ground-props.md).
