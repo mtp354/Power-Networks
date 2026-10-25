@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "FantasyEarth.World",
         "FantasyEarth.Fantasy",
-        "FantasyEarth.Positioning"
+        "FantasyEarth.Positioning",
+        "FantasyEarth.Diagnostics"
     ],
     "includePlatforms": [
         "Editor"
