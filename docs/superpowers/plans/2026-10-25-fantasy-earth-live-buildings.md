@@ -21,6 +21,12 @@ Implemented and installed; 159 Unity cases pass. Build and initial process check
 pass, while physical placement and live source arrival remain device acceptance
 work. See the [live-placement report](../../handoffs/reports/live-building-placement.md).
 
+Device acceptance:
+
+- [x] Owner confirms live camera video and the Buildings diagnostics line on the installed live-placement build.
+- [ ] Outdoors, confirm native building observations arrive and drawn count becomes positive after alignment lock.
+- [ ] Check physical placement/stability while panning/walking, then Home/reopen recovery without stale duplicates.
+
 The first live slice re-skins the actual Streetscape surface rather than guessing
 a ground altitude or extruding the matching adapter's convex hull. The original
 procedural canonical-footprint generator remains available for later map-ID

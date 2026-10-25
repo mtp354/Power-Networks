@@ -102,6 +102,11 @@ reported `WaitingForSession`, with zero observed/prepared/drawn buildings. This
 establishes startup safety; it does not establish live native geometry arrival
 or device rendering/placement before outdoor tracking is available.
 
+The owner subsequently confirmed on this live-building build that **camera video
+keeps updating and the three-finger panel shows the Buildings status line**.
+The camera/diagnostics smoke check passes. This confirmation does not yet establish
+geometry arrival or physical building placement outdoors.
+
 ## Device placement acceptance
 
 Outdoor appearance/placement remains to be confirmed on the new APK. The earlier
