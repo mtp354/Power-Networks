@@ -5,6 +5,7 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "FantasyEarth.World",
+        "FantasyEarth.Data",
         "FantasyEarth.Fantasy",
         "FantasyEarth.Positioning",
         "FantasyEarth.Diagnostics",

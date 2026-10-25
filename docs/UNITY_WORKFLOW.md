@@ -95,3 +95,16 @@ The owner authorized field-based calibration after the first walk. The horizonta
 ## Camera repair and building-generation slice
 
 The black camera/session regression was traced to missing Java location/auth dependencies in the incremental APK. Explicit persistent Gradle dependencies and `Tools/diagnostics/verify_geospatial_apk.py` now guard that path; the owner confirmed live camera video is restored. Alignment fine-tuning is deferred by request. The next completed slice adds reusable deterministic building geometry and an offline `BuildingPreview.unity` scene. All 134 EditMode cases pass, and the saved preview automatically reconstructs 12 meshes. See the [building report](handoffs/reports/building-generation-slice.md).
+
+## Building data and matching follow-up
+
+While the owner runs a fresh outdoor test, the next slice adds WGS84 local frames,
+Overture normalization, runtime tile reading, canonical building catalogs,
+polygon-overlap identity matching and a borrowed-mesh adapter. **153/153 Unity
+EditMode cases and 8/8 Python cases pass**; a public Boston sample produced 23
+rendered building parts and 23 correct identity round trips. Android build
+`build_6fa6bf0ce4d7` succeeded with zero errors and three known vendor warnings;
+the required location/auth Java definitions remain present. No APK was installed
+or ADB command sent during this work. Live tile acquisition, geographic placement,
+Streetscape lifecycle wiring and anchored rendering remain. See the
+[data/matching report](handoffs/reports/building-data-matching.md).

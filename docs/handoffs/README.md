@@ -6,6 +6,14 @@ Prepared 2026-10-25 from commit `d1fec0c`. These briefs are implementation instr
 
 ## Completed task briefs
 
+**Latest development checkpoint:** Tasks 9 and 10's code, the camera dependency
+repair, reusable building generation, and the offline building-data/matching
+slice are implemented. The latest suite has 153 passing Unity cases and eight
+passing importer cases. Actual lock acceptance is pending the current outdoor
+test; live building placement/Streetscape lifecycle wiring, ground props and the
+map view remain. Follow the [data/matching report](reports/building-data-matching.md)
+for the next integration work rather than redispatching these historical briefs.
+
 | Brief | Difficulty | Prerequisites | Scope |
 |---|---|---|---|
 | [Task 5: biome rules](task-5-biome-rules.md) | Easiest | Existing World assembly | Two small production types and exhaustive mapping tests |
