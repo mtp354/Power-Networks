@@ -21,3 +21,5 @@ unity command test run --mode EditMode --filter FantasyEarth --project-path "$PR
 RED: Python collection failed because the converter module was absent; Unity compilation failed with CS0246 because `ClimateModel` was absent. GREEN: **9 Python tests passed; 55 Unity EditMode cases passed, 0 failed/skipped; compilation completed without errors**. Unity commands used approved host access on the running 6000.3.27f1 Editor. Detailed JSON is stored locally in the plan's ignored `.superpowers/sdd/` directory.
 
 No scene or device setup was required. The user-visible attribution screen remains a Plan 3 deliverable.
+
+Final review follow-up: a new regression case demonstrated that a cache hit accepted an archive with the wrong checksum and overwrote the existing output. The converter now verifies cached archives against the same pinned MD5 before decoding or writing. The expanded Python suite passes **10/10**; regenerating from the real, verified cache still produces the exact SHA-256 above. Synthetic archive fixtures supply their own expected checksum for orientation/georeferencing tests.

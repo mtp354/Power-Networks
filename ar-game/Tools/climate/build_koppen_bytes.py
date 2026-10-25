@@ -55,6 +55,13 @@ def main(cache_dir: Path, out_path: Path) -> None:
     if not archive_path.exists():
         print(f"Downloading {SOURCE_URL}", flush=True)
         _download_archive(archive_path)
+    else:
+        digest = hashlib.md5()
+        with archive_path.open("rb") as cached:
+            while chunk := cached.read(1024 * 1024):
+                digest.update(chunk)
+        if digest.hexdigest() != SOURCE_MD5:
+            raise ValueError("Cached archive checksum does not match the pinned Figshare file")
 
     with zipfile.ZipFile(archive_path) as archive:
         with tifffile.TiffFile(io.BytesIO(archive.read(MEMBER_NAME))) as raster:

@@ -1,3 +1,4 @@
+import hashlib
 import io
 import zipfile
 
@@ -45,12 +46,14 @@ def cached_archive(cache_dir, *, south_up=False, longitude=-180.0, scale=0.1):
     )
     with zipfile.ZipFile(cache_dir / "koppen_geiger_tif.zip", "w", zipfile.ZIP_DEFLATED) as archive:
         archive.writestr("1991_2020/koppen_geiger_0p1.tif", tiff.getvalue())
+    return hashlib.md5((cache_dir / "koppen_geiger_tif.zip").read_bytes()).hexdigest()
 
 
 @pytest.mark.parametrize("south_up", [False, True])
 def test_main_reuses_cache_and_normalizes_rows(tmp_path, monkeypatch, south_up):
     cache = tmp_path / "cache"
-    cached_archive(cache, south_up=south_up)
+    checksum = cached_archive(cache, south_up=south_up)
+    monkeypatch.setattr("build_koppen_bytes.SOURCE_MD5", checksum)
 
     def unexpected_download(*args, **kwargs):
         pytest.fail("A cached archive must not be downloaded again")
@@ -65,10 +68,21 @@ def test_main_reuses_cache_and_normalizes_rows(tmp_path, monkeypatch, south_up):
 
 
 @pytest.mark.parametrize("metadata", [{"longitude": 0}, {"scale": 0.2}])
-def test_main_rejects_wrong_georeferencing(tmp_path, metadata):
+def test_main_rejects_wrong_georeferencing(tmp_path, monkeypatch, metadata):
     cache = tmp_path / "cache"
-    cached_archive(cache, **metadata)
+    checksum = cached_archive(cache, **metadata)
+    monkeypatch.setattr("build_koppen_bytes.SOURCE_MD5", checksum)
     out = tmp_path / "grid.bytes"
     with pytest.raises(ValueError, match="georeferenc"):
         main(cache, out)
     assert not out.exists()
+
+
+def test_main_rejects_unverified_cache_without_overwriting_output(tmp_path):
+    cache = tmp_path / "cache"
+    cached_archive(cache)
+    out = tmp_path / "grid.bytes"
+    out.write_bytes(b"previous asset")
+    with pytest.raises(ValueError, match="checksum"):
+        main(cache, out)
+    assert out.read_bytes() == b"previous asset"
