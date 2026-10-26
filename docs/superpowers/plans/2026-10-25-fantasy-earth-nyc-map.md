@@ -18,7 +18,7 @@ development takes priority and must not depend on that AR transform.
 - [x] Add a player marker/follow behavior only for valid in-coverage location, with orientation and accuracy state; do not export coordinates. Implemented/unit-validated; in-coverage field acceptance remains below.
 - [x] Include visible source attribution and an in-app credits panel before bundling the map data.
 - [x] Test geometry/data limits, map controls, location/coverage behavior and view switching; inspect GPU and Android/device results, preserve camera fallback and document limits. 182 Unity cases and five Python cases pass; Android installed and map/camera switching smoke-tested. See the [report](../../handoffs/reports/nyc-brooklyn-map.md).
-- [ ] Owner confirms phone visuals, touch pinch, credits and live camera return.
+- [x] Owner confirms phone visuals, touch drag/pinch, credits open/close and live camera return. Confirmed 2026-10-25.
 - [ ] Validate marker/follow/heading with real Earth tracking inside pilot coverage.
 
 Use existing Unity/Input System/URP packages. Map mode must not require a

@@ -150,8 +150,8 @@ pass**. Actual Editor Play Mode exercised pan/zoom/recenter, credits and camera
 switching; GPU previews show real waterfront geometry and shared props. Android
 build `build_06c082e3ff3e` succeeded, passed Java dependency verification and is
 installed on the S25. Coordinate-free device diagnostics confirm full map loading
-and cached map/camera switching; owner visuals and in-coverage marker acceptance
-remain. Physical live-building placement failed the owner's walk and is still
+and cached map/camera switching. The owner confirmed map visuals, drag/pinch,
+Credits open/close and live camera return; in-coverage marker acceptance remains. Physical live-building placement failed the owner's walk and is still
 unresolved. See the [map report](handoffs/reports/nyc-brooklyn-map.md).
 
 The installed Pipeline play-mode commands are `editor.playmode start` and

@@ -12,5 +12,14 @@
   ],
   "currentProcessUnityCrashErrorLines": 0,
   "panGestureInjected": true,
-  "limitations": "Native logs confirm loading and cached mode switching. Owner visual pinch, credits, camera return and in-coverage player/heading acceptance are separate; no screenshot or device location was collected."
+  "limitations": "Native logs confirm loading and cached mode switching; the owner confirmed map visuals, drag/pinch, credits and live camera return. In-coverage player/follow/heading acceptance remains pending. No screenshot or device location was collected.",
+  "ownerConfirmation": {
+    "date": "2026-10-25",
+    "mapVisualsWorking": true,
+    "dragPanWorking": true,
+    "pinchZoomWorking": true,
+    "creditsOpenCloseWorking": true,
+    "liveCameraReturns": true,
+    "reply": "Yes it is all working"
+  }
 }

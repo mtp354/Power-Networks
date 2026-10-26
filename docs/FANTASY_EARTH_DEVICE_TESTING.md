@@ -106,8 +106,9 @@ only with a usable reported orientation. Test real follow/heading inside pack
 coverage; changing preview center does not simulate a physical location.
 
 The phone smoke test loaded all 1,268 buildings and 2,706 surfaces and returned
-Map → Camera → Map without rebuilding. Owner visual acceptance of pinch, credits
-and restored live video remains pending. Terrain and bridge heights are
+Map → Camera → Map without rebuilding. The owner confirmed map visuals, drag/pinch,
+Credits open/close and restored live video work on 2026-10-25. Real in-coverage
+marker/follow/heading acceptance remains pending. Terrain and bridge heights are
 schematic; this map is not navigation guidance.
 
 `ErrorNotAuthorized` requires checking ARCore API enablement and the Android OAuth package/certificate pair. `Enabled` with no lock can reflect positioning quality or VPS coverage; record the real measurements before tuning thresholds.

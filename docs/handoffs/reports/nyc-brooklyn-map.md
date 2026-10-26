@@ -1,7 +1,8 @@
 # Brooklyn waterfront map pilot
 
-Implemented and validated in Unity and on Android on 2026-10-25. Owner visual
-acceptance on the S25 and an in-coverage location/heading walk remain pending.
+Implemented and validated in Unity and on Android on 2026-10-25. The owner
+confirmed map visuals, drag/pinch, Credits open/close and live camera return all
+work on the S25. An in-coverage location/heading walk remains pending.
 This is a bounded DUMBO/Brooklyn Bridge Park pilot, opening at Pier 1.
 
 ## Delivered
@@ -83,8 +84,9 @@ Pack SHA-256:
   event across both openings confirms reuse. Installed APK hash matches the build.
   See the [coordinate-free device record](nyc-map-device-summary.json).
   Current-process Unity/crash error
-  count was zero during the smoke check. Visual pinch, credits and live-camera
-  return are requested from the owner; input injection alone does not prove them.
+  count was zero during the smoke check. The owner subsequently confirmed the
+  map visuals, drag/pinch, Credits open/close and restored live video all work.
+  This owner confirmation is separate from the automated smoke evidence.
 
 APK: `ar-game/Builds/fantasy-earth-nyc-map.apk`, 75,174,061 bytes, SHA-256
 `e9c99a877ac6993f9b86b8199340aabf01e104dbdab4bdf1b64dbe45be14cf00`.
@@ -99,8 +101,8 @@ positions. That physical-placement failure remains open in the
 [live-placement report](live-building-placement.md). The map uses a geographic
 frame independent of the AR transform and does not fix or conceal that offset.
 
-First confirm phone map visuals, pinch, credits and camera return. Then validate
-the marker/follow/heading outdoors inside this pack's public coverage. The current
+Phone map visuals, drag/pinch, credits and live camera return are accepted. Next
+validate the marker/follow/heading outdoors inside this pack's public coverage. The current
 location source requires existing consent, precise permission and ARCore Earth
 tracking; independent map-only location is future work. Invalid location affects
 the marker, not offline browsing. No live in-coverage marker test is claimed.

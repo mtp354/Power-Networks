@@ -16,7 +16,8 @@ session identities was installed and tested outdoors: buildings persisted but
 were in incorrect physical positions, so physical placement failed. Shared seeded
 ground props now render on eligible surfaces in the first offline Brooklyn
 waterfront map, installed on the S25 with pan/zoom, map/camera switching and
-credits. Phone visual acceptance and in-coverage marker testing remain, alongside
+credits. The owner accepted map visuals, drag/pinch, credits and camera return.
+In-coverage marker testing remains, alongside
 AR transform repair and live prop terrain anchoring.
 See the [live-placement report](reports/live-building-placement.md) and
 [data/matching report](reports/building-data-matching.md), plus the
