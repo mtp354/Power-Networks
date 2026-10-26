@@ -30,7 +30,7 @@ namespace FantasyEarth.Rendering
             }
         }
 
-        public static Mesh Create(BuildingFootprint footprint, BuildingRecipe recipe)
+        public static Mesh Create(BuildingFootprint footprint, BuildingRecipe recipe, bool includeFacadeDetails = true)
         {
             if (footprint == null) throw new ArgumentNullException(nameof(footprint));
             var surface = new Surface();
@@ -76,6 +76,7 @@ namespace FantasyEarth.Rendering
                     else Gable(surface, a, b, height, roofY, wall);
                 }
 
+                if (!includeFacadeDetails) continue;
                 int windows = Mathf.Clamp(Mathf.FloorToInt(length / 2.1f), 1, 12);
                 float floorHeight = height / recipe.Floors;
                 for (int floor = 0; floor < recipe.Floors; floor++)

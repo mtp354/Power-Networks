@@ -1,5 +1,11 @@
 # Shared seeded ground props
 
+Subsequent integration: the [Brooklyn map pilot](nyc-brooklyn-map.md) now wires
+these geographic candidates into World map mode with actual green-space, road,
+water and building eligibility. That build is installed on the S25. Terrain is
+schematic in the map; live AR altitude/anchoring remains unimplemented. The
+uninstalled build and unwired status below describe this earlier standalone slice.
+
 Implemented while the owner ran the first live-building outdoor check. No ADB
 command was sent, no APK was installed, and the running phone session was not
 inspected or paused during this work.

@@ -24,8 +24,8 @@ work. See the [live-placement report](../../handoffs/reports/live-building-place
 Device acceptance:
 
 - [x] Owner confirms live camera video and the Buildings diagnostics line on the installed live-placement build.
-- [ ] Outdoors, confirm native building observations arrive and drawn count becomes positive after alignment lock.
-- [ ] Check physical placement/stability while panning/walking, then Home/reopen recovery without stale duplicates.
+- [x] Outdoors, confirm native building observations arrive and drawn count becomes positive after alignment lock. Owner observed persistent buildings; the session recorded 126 Locked samples.
+- [ ] Check physical placement/stability while panning/walking, then Home/reopen recovery without stale duplicates. **Failed physical placement:** owner reports persistent geometry in the wrong real-world positions. Offset investigation/recovery acceptance remain open; map work was prioritized next.
 
 The first live slice re-skins the actual Streetscape surface rather than guessing
 a ground altitude or extruding the matching adapter's convex hull. The original

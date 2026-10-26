@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-25",
+  "buildId": "build_06c082e3ff3e",
+  "installedSha256": "e9c99a877ac6993f9b86b8199340aabf01e104dbdab4bdf1b64dbe45be14cf00",
+  "apkBytes": 75174061,
+  "launch": "COLD, Status ok",
+  "coordinateFreeMapEvents": [
+    "mode=Map",
+    "ready buildings=1268 surfaces=2706 vertices=254571",
+    "mode=Camera",
+    "mode=Map"
+  ],
+  "currentProcessUnityCrashErrorLines": 0,
+  "panGestureInjected": true,
+  "limitations": "Native logs confirm loading and cached mode switching. Owner visual pinch, credits, camera return and in-coverage player/heading acceptance are separate; no screenshot or device location was collected."
+}

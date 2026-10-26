@@ -65,6 +65,7 @@ namespace FantasyEarth.Tests.App
                 References(Find<PaintedLookController>(scene), "library", "volume", "motes");
                 References(Find<DiagnosticsOverlay>(scene), "presenter", "buildings");
                 References(Find<LiveBuildingController>(scene), "sampler", "presenter", "origin", "layer", "buildingMaterial");
+                References(Find<MapPresenter>(scene),"mapPack","arCamera","sampler","buildings","buildingMaterial","markerMaterial","lookLibrary","uiFont");
                 Assert.IsNotNull(Find<ObservedBuildingLayer>(scene));
                 Assert.IsNull(FindOptional<ARStreetscapeGeometryManager>(scene), "SDK manager must be created only after native tracking is ready.");
                 References(Find<WorldPresenter>(scene), "sampler", "climate", "look", "logger");

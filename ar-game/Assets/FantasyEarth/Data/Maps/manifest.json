@@ -1,0 +1,90 @@
+{
+  "tileId": "nyc-brooklyn-waterfront-v1",
+  "mapName": "Brooklyn waterfront",
+  "sourceRelease": "2026-10-21.0",
+  "importedAtUtc": "2026-10-26T00:41:46Z",
+  "coverageBbox": [
+    -74.005,
+    40.694,
+    -73.983,
+    40.71
+  ],
+  "origin": [
+    40.702,
+    -73.994,
+    0.0
+  ],
+  "defaultCenter": [
+    40.7025,
+    -73.996
+  ],
+  "mapSources": [
+    {
+      "layer": "building",
+      "sha256": "d5645a33334870b529271529cb7eac3b47a30a61d01cd245ae86029e4efd1775"
+    },
+    {
+      "layer": "segment",
+      "sha256": "7593ec5d6d436e700595858497b95a180340ba0ace42e658941ff5f46de8d752"
+    },
+    {
+      "layer": "land-use",
+      "sha256": "4b9918073abd622c9365d4b625deb683ffea76d04a0abd6aecc18341a4cb0a8e"
+    },
+    {
+      "layer": "water",
+      "sha256": "6a63c560c254ef42a73b508c2908d5e42fcea8e062ba68747728423e0840d21e"
+    }
+  ],
+  "contributors": [
+    "Microsoft ML Buildings",
+    "OpenStreetMap",
+    "TomTom",
+    "USGS Lidar"
+  ],
+  "skipReasons": [
+    {
+      "reason": "elevated_geometry",
+      "count": 5
+    },
+    {
+      "reason": "unsupported_holes",
+      "count": 18
+    },
+    {
+      "reason": "unsupported_vertex_count",
+      "count": 3
+    }
+  ],
+  "mapSkipReasons": [
+    {
+      "reason": "non_area_water",
+      "count": 6
+    },
+    {
+      "reason": "non_green_land_use",
+      "count": 284
+    },
+    {
+      "reason": "non_road",
+      "count": 74
+    },
+    {
+      "reason": "outside_bounds",
+      "count": 8
+    },
+    {
+      "reason": "underground_surface",
+      "count": 22
+    },
+    {
+      "reason": "unsupported_surface_geometry",
+      "count": 2
+    }
+  ],
+  "bytes": 3508595,
+  "packSha256": "97b1c83b7be3e42947fa0f292febdf263f79549c5ba090a2c0b4042fd0125524",
+  "buildings": 1268,
+  "surfaces": 2706,
+  "surfaceTriangles": 22989
+}

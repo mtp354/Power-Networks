@@ -1,0 +1,8 @@
+{
+  "tileId": "nyc-brooklyn-waterfront-v1",
+  "name": "Brooklyn waterfront",
+  "origin": [40.702, -73.994],
+  "bbox": [-74.005, 40.694, -73.983, 40.710],
+  "defaultCenter": [40.7025, -73.9960],
+  "release": "2026-10-21.0"
+}

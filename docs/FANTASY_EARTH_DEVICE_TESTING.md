@@ -82,8 +82,33 @@ Then test Home/reopen and recovery after lock. If nothing appears, report status
 and the three counts: zero observations and rejected render candidates mean
 different things. No coordinates or private screenshots are needed.
 
-This device check remains distinct from Plan 1's completed lock test. Stable map
-IDs, canonical rebuilt architecture, props and map view are later integration.
+This device check remains distinct from Plan 1's completed lock test. The owner
+subsequently reported persistent buildings in the wrong real-world positions;
+physical placement failed and remains open. Map development proceeded separately.
+
+## Brooklyn waterfront map pilot
+
+The current installed build is `Builds/fantasy-earth-nyc-map.apk`; its exact
+artifact, coverage and validation are in the
+[map report](handoffs/reports/nyc-brooklyn-map.md). Tap **Map** near the bottom, or
+swipe upward from the bottom handle area. Drag to pan and pinch to zoom. **Preview**
+returns to Pier 1 when there is no valid local player. **Credits** opens the
+scrollable data/license panel. Tap **Camera** to return to live video; a downward
+swipe starting in the bottom handle area also returns. Three-finger diagnostics
+remains available.
+
+Offline browsing works without alignment lock. The location marker currently
+uses existing ARCore Earth tracking, consent and precise permission. It appears
+only inside this bounded Brooklyn pack with valid reported accuracy; unavailable
+or outside-coverage location is explicitly labelled NYC preview with no invented
+marker. **Follow me** recenters a valid marker after panning. Heading appears
+only with a usable reported orientation. Test real follow/heading inside pack
+coverage; changing preview center does not simulate a physical location.
+
+The phone smoke test loaded all 1,268 buildings and 2,706 surfaces and returned
+Map → Camera → Map without rebuilding. Owner visual acceptance of pinch, credits
+and restored live video remains pending. Terrain and bridge heights are
+schematic; this map is not navigation guidance.
 
 `ErrorNotAuthorized` requires checking ARCore API enablement and the Android OAuth package/certificate pair. `Enabled` with no lock can reflect positioning quality or VPS coverage; record the real measurements before tuning thresholds.
 

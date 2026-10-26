@@ -1,5 +1,10 @@
 # First live building placement
 
+Status after the outdoor check: buildings appeared persistently but did not
+correspond to the real building positions. Physical alignment **failed**. The
+owner prioritized NYC map work next; the cause/magnitude of the AR offset remains
+unresolved and is not inferred from reported Geospatial accuracy.
+
 The owner authorized a first live build using ARCore-observed building shapes
 with temporary session identities, before local canonical map tiles are available.
 
@@ -109,7 +114,15 @@ geometry arrival or physical building placement outdoors.
 
 ## Device placement acceptance
 
-Outdoor appearance/placement remains to be confirmed on the new APK. The earlier
+The owner confirmed that buildings appeared and stayed persistently located,
+but were in the wrong physical places. The coordinate-redacted session
+`20261025-212225.jsonl` has 1,121 records and 126 Locked samples, with locked
+medians 0.48 m / 1.32°. First lock is 881.394 seconds from the session's first
+record, including earlier indoor/background time; this is not outdoor acquisition
+time. The app process was absent at collection, with no cause established. See
+[the field aggregate](live-building-field-summary.json).
+
+These locks do not establish physical placement. The earlier
 Plan 1 lock result is valid for the camera-repaired APK and is not silently
 extended to this new live-geometry build.
 

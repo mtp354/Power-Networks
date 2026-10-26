@@ -141,3 +141,22 @@ the phone. A reusable chunk renderer supplies four biome looks and separate map
 and camera visibility policies. **175/175 EditMode cases pass**; five synthetic
 GPU previews include 36 props in four shared-material chunks. Terrain adapters and
 live anchoring remain. See the [ground-prop report](handoffs/reports/ground-props.md).
+
+## Brooklyn waterfront map
+
+The first offline NYC pack now renders in World, with uGUI/TMP controls and a
+separate layer/camera. **182/182 EditMode cases and 5/5 Python map-converter cases
+pass**. Actual Editor Play Mode exercised pan/zoom/recenter, credits and camera
+switching; GPU previews show real waterfront geometry and shared props. Android
+build `build_06c082e3ff3e` succeeded, passed Java dependency verification and is
+installed on the S25. Coordinate-free device diagnostics confirm full map loading
+and cached map/camera switching; owner visuals and in-coverage marker acceptance
+remain. Physical live-building placement failed the owner's walk and is still
+unresolved. See the [map report](handoffs/reports/nyc-brooklyn-map.md).
+
+The installed Pipeline play-mode commands are `editor.playmode start` and
+`editor.playmode stop`, with no parameters. Finish asynchronous tests/builds
+before entering Play Mode or running additive preview scripts. Test Runner can
+temporarily restore an untitled scene; reopen saved World first. Map preview and
+runtime check entry points are documented in
+[Tools/maps/README.md](../ar-game/Tools/maps/README.md).

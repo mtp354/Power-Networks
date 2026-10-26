@@ -25,6 +25,7 @@ namespace FantasyEarth.App
 
         public PositioningSample Current { get; private set; }
         public GeoPoint? Position { get; private set; }
+        public Quaternion? EunOrientation { get; private set; }
         public string EarthStateName { get; private set; } = "SessionNotReady";
         public bool StreetscapeReady => Current.IsTracking && extensions!=null && extensions.isActiveAndEnabled &&
             _runtimeConfig!=null && _runtimeConfig.StreetscapeGeometryMode==StreetscapeGeometryMode.Enabled;
@@ -57,6 +58,7 @@ namespace FantasyEarth.App
         private void Update()
         {
             Position = null;
+            EunOrientation = null;
             Current = new PositioningSample(false, double.NaN, double.NaN);
             if (Application.isEditor)
             {
@@ -106,6 +108,7 @@ namespace FantasyEarth.App
                 return;
             }
             Position = new GeoPoint(pose.Latitude, pose.Longitude);
+            EunOrientation = pose.EunRotation;
             Current = PositioningSample.FromEarth(true, true, pose.HorizontalAccuracy, pose.OrientationYawAccuracy);
         }
 

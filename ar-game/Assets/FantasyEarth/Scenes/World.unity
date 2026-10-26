@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
   m_IsGlobal: 1
   priority: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.XR.TrackedPoseDriver
   m_TrackingType: 0
   m_UpdateType: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 816b289ef451e094f9ae174fb4cf8db0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARCameraBackground
   m_UseCustomMaterial: 0
   m_CustomMaterial: {fileID: 0}
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4966719baa26e4b0e8231a24d9bd491a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARCameraManager
   m_FocusMode: -1
   m_LightEstimationMode: -1
@@ -443,7 +443,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3758096383
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3859a92a05d4f5d418cb6ca605290e74, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARSession
   m_AttemptUpdate: 1
   m_MatchFrameRate: 1
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa850fbd5b8aded44846f96e35f1a9f5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARInputManager
 --- !u!4 &537698361
 Transform:
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions::Google.XR.ARCoreExtensions.ARCoreExtensions
   Session: {fileID: 537698359}
   Origin: {fileID: 1491631404}
@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 1038501700}
   - component: {fileID: 1038501708}
   - component: {fileID: 1038501707}
+  - component: {fileID: 1038501709}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -598,7 +599,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a126971a55f75c946b56e2da461b7205, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.WorldPresenter
   sampler: {fileID: 1038501705}
   climate: {fileID: 1038501704}
@@ -614,7 +615,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f42d05a093f7a4eee810582912aa749f, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.DiagnosticsOverlay
   presenter: {fileID: 1038501700}
   buildings: {fileID: 1038501707}
@@ -628,7 +629,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f748f116d35bdf507842f2d928528dc3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.SessionLogger
 --- !u!114 &1038501703
 MonoBehaviour:
@@ -640,7 +641,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b844494adb68d7ae9b20191464657a0, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.PaintedLookController
   library: {fileID: 11400000, guid: 3195f8b3be6d56c8d8a04bc00a280330, type: 2}
   volume: {fileID: 123572311}
@@ -655,7 +656,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 855e0b5ae622ded8ea0a0b9ff2868e82, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.ClimateService
   koppenGrid: {fileID: 4900000, guid: 4dee457d3134e7b36a3d0bf4431cec07, type: 3}
 --- !u!114 &1038501705
@@ -668,7 +669,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b7cd3d8f10a27b7d9ac428922a272a2, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.GeospatialSampler
   earthManager: {fileID: 1491631405}
   extensions: {fileID: 695545269}
@@ -716,6 +717,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b79174dc9e56a74a46f726251b3aae, type: 3}
   m_Name:
   m_EditorClassIdentifier: FantasyEarth.Rendering::FantasyEarth.Rendering.ObservedBuildingLayer
+--- !u!114 &1038501709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038501699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd46c9c5880d7f218e83467a3cb5456, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: FantasyEarth.App::FantasyEarth.App.MapPresenter
+  mapPack: {fileID: 4900000, guid: a8abdc5ad2c686d1e8e5b6ecf0561d77, type: 3}
+  arCamera: {fileID: 135139921}
+  sampler: {fileID: 1038501705}
+  buildings: {fileID: 1038501707}
+  buildingMaterial: {fileID: 2100000, guid: ec5833ab16710d2258f439e775a1c0f9, type: 2}
+  markerMaterial: {fileID: 2100000, guid: 4faefbbaa4591e8699331322d4d2fa22, type: 2}
+  lookLibrary: {fileID: 11400000, guid: 3195f8b3be6d56c8d8a04bc00a280330, type: 2}
+  uiFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
 --- !u!1 &1491631402
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +781,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.XR.CoreUtils::Unity.XR.CoreUtils.XROrigin
   m_Camera: {fileID: 135139921}
   m_OriginBaseGameObject: {fileID: 1491631402}
@@ -777,7 +798,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04013b89158ee479c9d622e942e3b60b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Google.XR.ARCoreExtensions::Google.XR.ARCoreExtensions.AREarthManager
 --- !u!1 &1943780258
 GameObject:

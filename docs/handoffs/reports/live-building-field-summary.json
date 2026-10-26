@@ -1,0 +1,23 @@
+{
+  "records": 1121,
+  "lockedRecords": 126,
+  "firstLockSeconds": 881.394,
+  "medianLockedHorizontalM": 0.48,
+  "medianLockedYawDeg": 1.32,
+  "earthStates": [
+    "Enabled",
+    "SessionNotReady"
+  ],
+  "date": "2026-10-25",
+  "session": "20261025-212225.jsonl",
+  "expectedDevelopmentBuild": "build_b11d1aab1679",
+  "ownerReported": {
+    "cameraUpdating": true,
+    "buildingsAppeared": true,
+    "buildingsPersistent": true,
+    "physicalPlacementCorrect": false
+  },
+  "acceptance": "Physical building placement failed: persistent rendered buildings did not correspond to the real building positions. Map work prioritized by owner.",
+  "limitations": "Coordinate-redacted log establishes gate locks only; no spatial offset magnitude or cause is inferred. The app process was absent at collection; reason is unknown.",
+  "installedApkSha256AtCollection": "c47547b63cbbac566347276bdb86d686127a439ee4b51a27a55db15f1d73df31"
+}

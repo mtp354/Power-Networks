@@ -23,6 +23,12 @@ namespace FantasyEarth.Fantasy
         public double Scale { get; }
         public double YawDeg { get; }
         public double RadiusM => (Kind==GroundPropKind.Vegetation ? 2.4 : Kind==GroundPropKind.Boulder ? 1.2 : .8)*Scale;
+        public GroundProp Reproject(LocalGeoFrame frame,double groundUpM)
+        {
+            if (frame==null) throw new ArgumentNullException(nameof(frame));
+            LocalPoint point=frame.Project(GeographicPosition,frame.OriginAltitudeM);
+            return new GroundProp(Id,Seed,GeographicPosition,new LocalPoint(point.EastM,groundUpM,point.NorthM),Kind,Biome,Scale,YawDeg);
+        }
     }
 
     /// <summary>Shared camera/map candidate rules. Eligible ground height is supplied, never invented.</summary>

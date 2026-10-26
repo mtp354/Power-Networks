@@ -8,17 +8,20 @@ Prepared 2026-10-25 from commit `d1fec0c`. These briefs are implementation instr
 
 **Latest development checkpoint:** Tasks 9 and 10's code, the camera dependency
 repair, reusable building generation, and the offline building-data/matching
-slice are implemented. The latest suite has 175 passing Unity cases and eight
-passing importer cases. Plan 1 device acceptance is now complete: the outdoor
+slice are implemented. The latest suite has 182 passing Unity cases and five
+passing map-converter cases (the prior importer run passed eight cases). Plan 1 device acceptance is now complete: the outdoor
 follow-up recorded 82 Locked samples, first lock at 74.906 seconds and locked
 medians 0.88 m / 1.36°. A first live Streetscape placement build with temporary
-session identities is now implemented and installed; outdoor physical placement
-validation remains. Shared seeded ground-prop generation, biome meshes and
-camera/map visibility are also implemented and previewed offline; terrain
-anchoring and World wiring remain. Stable map integration and the map view follow.
+session identities was installed and tested outdoors: buildings persisted but
+were in incorrect physical positions, so physical placement failed. Shared seeded
+ground props now render on eligible surfaces in the first offline Brooklyn
+waterfront map, installed on the S25 with pan/zoom, map/camera switching and
+credits. Phone visual acceptance and in-coverage marker testing remain, alongside
+AR transform repair and live prop terrain anchoring.
 See the [live-placement report](reports/live-building-placement.md) and
 [data/matching report](reports/building-data-matching.md), plus the
-[ground-prop report](reports/ground-props.md); do not redispatch these historical briefs.
+[ground-prop report](reports/ground-props.md) and
+[Brooklyn map report](reports/nyc-brooklyn-map.md); do not redispatch these historical briefs.
 
 | Brief | Difficulty | Prerequisites | Scope |
 |---|---|---|---|
